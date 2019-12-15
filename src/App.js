@@ -1,99 +1,66 @@
 import React from "react";
+import { AppRegistry, View, StyleSheet } from "react-native";
 import {
-  AppRegistry,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  TextInput
-} from "react-native";
+  Card,
+  Button,
+  SubTitle,
+  Label,
+  Title,
+  Input
+} from "./Components/delivery-fold-components";
 
 class App extends React.Component {
   render() {
+    return <LoginForm />;
+  }
+}
+
+class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: null,
+      password: null
+    };
+  }
+  render() {
     return (
-      <View style={styles.card}>
-        <Text style={styles.title}>Hello, world!</Text>
-        <Text style={styles.subTitle}>Hello, world!</Text>
-        <Text style={styles.text}>Hello, world!</Text>
-        <TextInput placeholder={"Password"} style={styles.input}></TextInput>
-        <Button
-          style={styles.button}
-          fontStyle={styles.buttonFont}
-          title="Press me"
-          onPress={() => console.log("ciao")}
+      <Card>
+        <Title text={"Benvenuto in DeliveryFood"} />
+        <SubTitle
+          text={"Inserisci le tue credenziali per accedere al servizio"}
         />
-      </View>
+        <View style={styles.formRow}>
+          <Label text={"Inserisci la tua email:"} />
+          <View style={{ width: "50%" }}>
+            <Input placeholder={"email"} />
+          </View>
+        </View>
+        <View style={styles.formRow}>
+          <Label text={"Inserisci la tua password:"} />
+          <View style={{ width: "50%" }}>
+            <Input placeholder={"password"} />
+          </View>
+        </View>
+        <View style={styles.submitButton}>
+          <Button text={"ACCEDI"} />
+        </View>
+      </Card>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  input: {
-    fontSize: "14px",
-    padding: 3,
-    borderRadius: 2,
-    borderColor: "gray",
-    borderWidth: 1
+  formRow: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center"
   },
-  card: {
-    borderRadius: 2,
-    padding: 6,
-    marginTop: "10%",
-    marginLeft: "20%",
-    marginRight: "20%",
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 6
-  },
-
-  title: {
-    fontWeight: "bold",
-    fontSize: "26px",
-    alignSelf: "center"
-  },
-  subTitle: { fontWeight: "semi-bold", fontSize: "20px" },
-  text: { fontSize: "16px" },
-  button: {
-    borderRadius: 2,
-
-    alignSelf: "center",
-    backgroundColor: "#ff7733",
-    padding: 4,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-
-    elevation: 3
-  },
-  buttonFont: {
-    fontSize: "16px",
-    fontWeight: "bold",
-    color: "black"
+  submitButton: {
+    justifyContent: "flex-end",
+    flexDirection: "row"
   }
 });
-
-function Button(props) {
-  return (
-    <TouchableOpacity
-      activeOpacity={0.75}
-      underlayColor={"white"}
-      style={props.style}
-      onPress={props.onPress}
-    >
-      <Text style={props.fontStyle}>{props.title}</Text>
-    </TouchableOpacity>
-  );
-}
 
 AppRegistry.registerComponent("App", () => App);
 AppRegistry.runApplication("App", {

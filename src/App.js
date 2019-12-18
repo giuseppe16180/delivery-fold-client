@@ -10,11 +10,6 @@ class App extends React.Component {
   }
 }
 
-AppRegistry.registerComponent("App", () => App);
-AppRegistry.runApplication("App", {
-  rootTag: document.getElementById("root")
-});
-
 const provider = new DataProvider();
 
 export default App;

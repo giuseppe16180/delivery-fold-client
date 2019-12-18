@@ -26,9 +26,11 @@ export function Label(props) {
 export function Input(props) {
   return (
     <TextInput
+      value={props.value}
       placeholder={props.placeholder}
-      onChange={props.onChange}
+      onChangeText={props.onChange}
       style={styles.input}
+      secureTextEntry={props.hide}
     />
   );
 }

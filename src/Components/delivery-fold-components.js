@@ -110,15 +110,16 @@ const styles = StyleSheet.create({
     elevation: 12
   },
   separator: {
-    flexDirection: "column",
+    marginTop: 18
+  },
+  flatCard: {
+    margin: 6,
+    flexDirection: "row",
+    padding: 6,
+    borderColor: "#aaaaaa",
+    borderWidth: 1,
     borderRadius: 2,
-    height: 2,
-    marginTop: 12,
-    marginBottom: 12,
-    marginLeft: 6,
-    marginRight: 6,
-
-    backgroundColor: "#aaaaaa",
+    backgroundColor: "white",
     shadowColor: "black",
     shadowOffset: {
       width: 0,
@@ -127,21 +128,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 0
-  },
-  flatCard: {
-    margin: 6,
-    flexDirection: "row",
-    padding: 6,
-    borderRadius: 2,
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 6
   },
   input: {
     fontSize: "14px",

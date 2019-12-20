@@ -10,44 +10,35 @@ import {
   FlatCard
 } from "./delivery-fold-components";
 //https://picsum.photos/id/400/400
-class RestaurantSmall extends React.Component {
-  constructor(props) {
-    super(props);
-    console.debug("RestaurantSmall", "constructor");
-    this.state = {
-      restaurantID: null
-    };
-  }
-
-  handleDetails = () => {
-    console.debug("RestaurantSmall", "handleDetails");
-  };
-
-  render() {
-    return (
-      <FlatCard>
-        <Image style={styles.image} source={"https://picsum.photos/400"} />
-        <View style={{ flex: 2 }}>
-          <SubTitle text="asdasdasdasd" />
+function RestaurantSmall(props) {
+  return (
+    <FlatCard>
+      <Image style={styles.image} source={props.image} />
+      <View style={styles.content}>
+        <SubTitle text={props.name} />
+        <Label text={props.description} />
+        <View style={styles.buttonRow}>
+          <Button text={"dettagli"} onPress={props.onPressDetails} />
         </View>
-      </FlatCard>
-    );
-  }
+      </View>
+    </FlatCard>
+  );
 }
 
 const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    height: 200
-  },
-  formRow: {
-    justifyContent: "space-between",
+  buttonRow: {
+    width: "100%",
     flexDirection: "row",
-    alignItems: "center"
+    justifyContent: "flex-end"
   },
-  submitButton: {
-    justifyContent: "flex-end",
-    flexDirection: "row"
+  content: {
+    flex: 3,
+    justifyContent: "space-between"
+  },
+  image: {
+    flex: 2,
+    marginRight: 12,
+    height: 150
   }
 });
 

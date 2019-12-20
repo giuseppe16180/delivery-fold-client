@@ -11,6 +11,10 @@ export function Card(props) {
   return <View style={styles.card}>{props.children}</View>;
 }
 
+export function FlatCard(props) {
+  return <View style={styles.flatCard}>{props.children}</View>;
+}
+
 export function Title(props) {
   return <Text style={styles.title}>{props.text}</Text>;
 }
@@ -35,7 +39,7 @@ export function Input(props) {
   );
 }
 
-function _ButtonFactory(props) {
+function ButtonFactory(props) {
   return (
     <TouchableOpacity
       activeOpacity={0.75}
@@ -50,7 +54,7 @@ function _ButtonFactory(props) {
 
 export function Button(props) {
   return (
-    <_ButtonFactory
+    <ButtonFactory
       style={styles.button}
       fontStyle={styles.buttonFont}
       title={props.text}
@@ -59,7 +63,30 @@ export function Button(props) {
   );
 }
 
+export function Separator() {
+  return <View style={styles.separator}></View>;
+}
+
 const styles = StyleSheet.create({
+  separator: {
+    flexDirection: "column",
+    borderRadius: 3,
+    height: 2,
+    marginTop: 12,
+    marginBottom: 12,
+    marginLeft: 6,
+    marginRight: 6,
+
+    backgroundColor: "#aaaaaa",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6
+  },
   input: {
     fontSize: "14px",
     padding: 3,
@@ -72,7 +99,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     borderRadius: 2,
     padding: 6,
-    marginTop: "10%",
+    marginTop: 24,
     marginLeft: "20%",
     marginRight: "20%",
     backgroundColor: "white",
@@ -84,6 +111,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 6
+  },
+
+  flatCard: {
+    margin: 6,
+    flexDirection: "row",
+    borderRadius: 0,
+    padding: 6,
+    borderRadius: 2,
+    borderColor: "#aaaaaa",
+    borderWidth: 1,
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 0
   },
 
   title: {

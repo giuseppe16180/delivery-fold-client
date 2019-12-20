@@ -24,4 +24,6 @@ function App() {
   );
 }
 
+const provider = new DataProvider();
+
 export default App;

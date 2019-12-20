@@ -8,11 +8,13 @@ import {
   Title,
   Input
 } from "./delivery-fold-components";
+import DataProvider from "./../DataProvider";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     console.debug("Login", "constructor");
+    this.provider = new DataProvider();
     this.state = {
       email: null,
       password: null
@@ -21,6 +23,7 @@ class Login extends React.Component {
 
   handleSubmit = () => {
     console.log(this.state.email, this.state.password);
+    this.provider.doLogin(this.state);
   };
 
   render() {

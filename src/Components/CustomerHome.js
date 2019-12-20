@@ -7,42 +7,53 @@ import {
   Label,
   Title,
   Input,
-  Separator
+  Separator,
+  FlatCard,
+  HeaderCard,
+  FooterCard
 } from "./delivery-fold-components";
 import RestaurantSmall from "./RestaurantSmall";
 
 class CustomerHome extends React.Component {
   render() {
     return (
-      <Card>
-        <Title text={"DeliveryFood Home"} />
-        <Separator />
-
-        <SubTitle text={"Questa è la tua area utente:"} />
-        <View style={styles.userPanel}>
-          <Button text={"Visualizza i tuoi ordini"} />
-          <Button text={"Modifica le tue info"} />
-          <Button text={"Consulta le offerte speciali"} />
-        </View>
-        <Separator />
-        <View style={styles.searchRow}>
-          <SubTitle text={"Un po' di fame? Cerca tra i nostri ristoranti!"} />
+      <View>
+        <HeaderCard>
+          <Title text={"DeliveryFood Home"} />
           <View style={styles.searchView}>
             <Input placeholder={"Cerca"}></Input>
             <Button text={"🔎"} />
           </View>
-        </View>
-        <Separator />
+          <View style={styles.userPanel}>
+            <Button text={"i tuoi ordini"} />
+            <Button text={"il tuo profilo"} />
+          </View>
+        </HeaderCard>
 
-        <SubTitle text={"Ecco i nostri suggerimenti"} />
-        <Label text={"Perché non dai uno sguardo alle offerte del giorno?"} />
+        <Card>
+          <View style={styles.searchRow}>
+            <SubTitle text={"Un po' di fame? Cerca tra i nostri ristoranti!"} />
+          </View>
+          <Separator />
 
-        <RestaurantSmall />
-        <RestaurantSmall />
-        <RestaurantSmall />
-        <RestaurantSmall />
-        <RestaurantSmall />
-      </Card>
+          <SubTitle text={"Ecco i nostri suggerimenti"} />
+          <Label text={"Perché non dai uno sguardo alle offerte del giorno?"} />
+
+          <RestaurantSmall />
+          <RestaurantSmall />
+          <RestaurantSmall />
+          <RestaurantSmall />
+          <RestaurantSmall />
+        </Card>
+
+        <FooterCard>
+          <Label
+            text={
+              "DeliveryFood - 2020 - Gruppo 8 Progetto Ingegneria del Software"
+            }
+          />
+        </FooterCard>
+      </View>
     );
   }
 }

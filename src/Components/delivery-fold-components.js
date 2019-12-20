@@ -15,6 +15,10 @@ export function FlatCard(props) {
   return <View style={styles.flatCard}>{props.children}</View>;
 }
 
+export function HeaderCard(props) {
+  return <View style={styles.headerCard}>{props.children}</View>;
+}
+
 export function Title(props) {
   return <Text style={styles.title}>{props.text}</Text>;
 }
@@ -25,6 +29,10 @@ export function SubTitle(props) {
 
 export function Label(props) {
   return <Text style={styles.label}>{props.text}</Text>;
+}
+
+export function FooterCard(props) {
+  return <View style={styles.footerCard}>{props.children}</View>;
 }
 
 export function Input(props) {
@@ -68,9 +76,42 @@ export function Separator() {
 }
 
 const styles = StyleSheet.create({
+  headerCard: {
+    paddingLeft: 24,
+    paddingRight: 24,
+    position: "relative",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 6,
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 6
+    },
+    shadowOpacity: 0.9,
+    shadowRadius: 12,
+    elevation: 12
+  },
+
+  footerCard: {
+    marginTop: 24,
+    flexDirection: "row",
+    justifyContent: "center",
+    padding: 6,
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: -3
+    },
+    shadowOpacity: 0.9,
+    shadowRadius: 12,
+    elevation: 12
+  },
   separator: {
     flexDirection: "column",
-    borderRadius: 3,
+    borderRadius: 2,
     height: 2,
     marginTop: 12,
     marginBottom: 12,
@@ -78,6 +119,21 @@ const styles = StyleSheet.create({
     marginRight: 6,
 
     backgroundColor: "#aaaaaa",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 0
+  },
+  flatCard: {
+    margin: 6,
+    flexDirection: "row",
+    padding: 6,
+    borderRadius: 2,
+    backgroundColor: "white",
     shadowColor: "black",
     shadowOffset: {
       width: 0,
@@ -108,28 +164,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3
     },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.6,
     shadowRadius: 6,
     elevation: 6
-  },
-
-  flatCard: {
-    margin: 6,
-    flexDirection: "row",
-    borderRadius: 0,
-    padding: 6,
-    borderRadius: 2,
-    borderColor: "#aaaaaa",
-    borderWidth: 1,
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 0
   },
 
   title: {
@@ -137,8 +174,8 @@ const styles = StyleSheet.create({
     fontSize: "26px",
     margin: 6
   },
-  subTitle: { fontWeight: "semi-bold", fontSize: "20px", margin: 6 },
-  label: { fontSize: "14px", margin: 6 },
+  subTitle: { fontWeight: "bold", fontSize: "20px", margin: 6 },
+  label: { fontWeight: "600", fontSize: "14px", margin: 6 },
   button: {
     borderRadius: 2,
 

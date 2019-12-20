@@ -1,8 +1,9 @@
 body {
-  /*background-image: url("sfondo.jpg");*/
-  background-size: auto 200%;
+  background-image: url("sfondo.jpg");
+  background-size: 100%;
   background-repeat: no-repeat;
-  background-position: left top;
+  background-attachment: fixed;
+
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

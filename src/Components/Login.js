@@ -22,8 +22,13 @@ class Login extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log(this.state.email, this.state.password);
-    this.provider.doLogin(this.state);
+    console.debug(
+      "Login",
+      "handleSubmit",
+      this.state.email,
+      this.state.password
+    );
+    this.provider.doLogin(this.state.email, this.state.password);
   };
 
   render() {

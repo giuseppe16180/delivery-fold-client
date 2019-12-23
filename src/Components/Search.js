@@ -22,6 +22,7 @@ class Search extends React.Component {
     this.provider = new DataProvider();
     console.log("customer token", this.provider.token);
     this.state = { query: null, results: null };
+    this.handleSearch = this.handleSearch.bind(this); // Era questo il problema   https://stackoverflow.com/questions/39176248/react-js-cant-read-property-of-undefined
   }
 
   componentDidMount() {
@@ -59,7 +60,7 @@ class Search extends React.Component {
           <FlatCard>
             <View style={styles.searchRow}>
               <SubTitle text={"Ecco i risultati della tua ricerca"} />
-              <Label text={this.provider.query} />
+              <Label text={this.state.query} />
               <View style={styles.searchView}>
                 <Input
                   placeholder={"Cerca"}

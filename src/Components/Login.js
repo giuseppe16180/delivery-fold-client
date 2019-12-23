@@ -28,7 +28,12 @@ class Login extends React.Component {
       this.state.email,
       this.state.password
     );
-    this.provider.doLogin(this.state.email, this.state.password);
+    this.provider
+      .doLogin(this.state.email, this.state.password)
+      .catch(error => {
+        console.error(error);
+        alert("Riprova");
+      });
   };
 
   render() {

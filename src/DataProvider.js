@@ -1,3 +1,8 @@
+export const routes = {
+  login: "Login",
+  customerHome: "CustomerHome"
+};
+
 class DataProvider {
   constructor() {
     if (!!DataProvider.instance) {
@@ -8,14 +13,20 @@ class DataProvider {
     DataProvider.instance = this;
 
     //private members
-    this.apiUrl = "http://xiaomi-air-vincenzo:8080";
+    this.apiUrl = "http://localhost:8080/";
     this.headers = {
       "Content-Type": "application/json",
       "Access-Control-Origin": "*"
     };
 
-    //public members
-    this.token = "";
+    if (sessionStorage.getItem("token") !== undefined) {
+      console.debug("DataProvider", "constructor", "token found");
+
+      this.token = sessionStorage.getItem("token");
+    } else {
+      console.debug("DataProvider", "constructor", "token not found");
+      this.token = null;
+    }
 
     console.debug("DataProvider", "constructor", "new instance");
     return this;
@@ -47,12 +58,24 @@ class DataProvider {
       password: password
     };
 
-    this.doPost("/cliente/login", data)
-      .then(response => {
-        console.debug("DataProvider", "doLogin", "token", response.value);
-        this.token = response.value;
-      })
-      .catch(error => console.error(error));
+    return new Promise((resolve, reject) => {
+      this.doPost("/cliente/login", data)
+        .then(response => {
+          if (response.value != null) {
+            sessionStorage.setItem("token", response.value);
+            this.navigateCustomerHome();
+          } else {
+            reject(new Error("Login Incorrect"));
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+  }
+
+  navigateCustomerHome() {
+    window.location.href = "CustomerHome";
   }
 }
 

@@ -13,9 +13,22 @@ import {
   FooterCard
 } from "./delivery-fold-components";
 import RestaurantSmall from "./RestaurantSmall";
+import DataProvider from "./../DataProvider";
 
 class CustomerHome extends React.Component {
+  constructor(props) {
+    super(props);
+    console.debug("CustomerHome", "constructor");
+    this.provider = new DataProvider();
+    console.log("customer token", this.provider.token);
+  }
+
+  componentDidMount() {
+    console.debug("CustomerHome", "componentDidMount");
+  }
+
   render() {
+    console.debug("CustomerHome", "render");
     return (
       <View>
         <HeaderCard>

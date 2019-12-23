@@ -17,7 +17,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path="/Login">
+        <Route path="/login">
           <Login />
         </Route>
         <Route path="/CustomerSignin">

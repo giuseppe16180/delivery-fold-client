@@ -65,11 +65,12 @@ class DataProvider {
             sessionStorage.setItem("token", response.value);
             this.navigateCustomerHome();
           } else {
-            reject(new Error("Login Incorrect"));
+            reject("LoginIncorrect");
           }
         })
         .catch(error => {
           console.error(error);
+          reject("FailedToFetch");
         });
     });
   }

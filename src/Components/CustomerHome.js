@@ -64,17 +64,17 @@ class CustomerHome extends React.Component {
           <RestaurantSmall
             image={"https://picsum.photos/id/400/400"}
             name={"Pippo balli"}
-            description={"sucamamminciha"}
+            description={"avfwegwrg"}
           />
           <RestaurantSmall
             image={"https://picsum.photos/id/400/400"}
             name={"Pippo balli"}
-            description={"sucamamminciha"}
+            description={"wefwevgwrber"}
           />
           <RestaurantSmall
             image={"https://picsum.photos/id/400/400"}
             name={"Pippo balli"}
-            description={"sucamamminciha"}
+            description={"wegwrg3h"}
           />
         </Card>
 

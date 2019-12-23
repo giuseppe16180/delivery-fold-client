@@ -31,8 +31,12 @@ class Login extends React.Component {
     this.provider
       .doLogin(this.state.email, this.state.password)
       .catch(error => {
-        console.error(error);
-        alert("Riprova");
+        console.log(error);
+        if (error == "LoginIncorrect") {
+          alert("Email o password errate");
+        } else if (error == "FailedToFetch") {
+          alert("impossibile contattare il server, prova più tardi");
+        }
       });
   };
 

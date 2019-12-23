@@ -50,7 +50,7 @@ class DataProvider {
     });
   }
 
-  doLogin(email, password) {
+  doLogin = (email, password) => {
     console.debug("DataProvider", "doLogin");
 
     var data = {
@@ -73,10 +73,37 @@ class DataProvider {
           reject("FailedToFetch");
         });
     });
+  };
+
+  doSearch(query) {
+    console.debug("DataProvider", "doSearch");
+
+    var data = {
+      nome: query
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("/ristorante/find", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
   }
 
   navigateCustomerHome() {
     window.location.href = "CustomerHome";
+  }
+
+  navigateSearch() {
+    window.location.href = "Search";
   }
 }
 

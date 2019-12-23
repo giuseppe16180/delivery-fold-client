@@ -4,7 +4,7 @@ import CustomerSignin from "./Components/CustomerSignin";
 import CustomerHome from "./Components/CustomerHome";
 import { AppRegistry, Text } from "react-native";
 import DataProvider from "./DataProvider";
-
+import Search from "./Components/Search";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "./Components/delivery-fold-components";
 
@@ -25,6 +25,9 @@ class App extends React.Component {
         </Route>
         <Route path="/CustomerHome">
           <CustomerHome />
+        </Route>
+        <Route path="/Search">
+          <Search />
         </Route>
       </Router>
     );

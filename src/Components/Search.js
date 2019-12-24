@@ -41,6 +41,7 @@ class Search extends React.Component {
           alert("impossibile contattare il server, prova più tardi");
         }
       });
+      
   }
 
   render() {
@@ -75,11 +76,11 @@ class Search extends React.Component {
             renderItem={({ item }) => (
               <RestaurantSmall
                 image={"https://picsum.photos/id/400/400"}
-                name={item.nome}
-                description={item.indirizzo + item.orario}
+                name={item.ristorante.nome}
+                description={item.ristorante.indirizzo + "\n" + item.ristorante.orario}
               />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.ristorante.id}
           />
         </Card>
 

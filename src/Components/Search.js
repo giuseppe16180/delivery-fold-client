@@ -41,7 +41,6 @@ class Search extends React.Component {
           alert("impossibile contattare il server, prova più tardi");
         }
       });
-      
   }
 
   render() {
@@ -61,7 +60,6 @@ class Search extends React.Component {
           <FlatCard>
             <View style={styles.searchRow}>
               <SubTitle text={"Ecco i risultati della tua ricerca"} />
-              <Label text={this.state.query} />
               <View style={styles.searchView}>
                 <Input
                   placeholder={"Cerca"}
@@ -77,7 +75,8 @@ class Search extends React.Component {
               <RestaurantSmall
                 image={"https://picsum.photos/id/400/400"}
                 name={item.ristorante.nome}
-                description={item.ristorante.indirizzo + "\n" + item.ristorante.orario}
+                description={item.ristorante.indirizzo}
+                descriptionSmall={item.ristorante.orario}
               />
             )}
             keyExtractor={item => item.ristorante.id}

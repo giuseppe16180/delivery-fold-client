@@ -7,7 +7,8 @@ import {
   Label,
   Title,
   Input,
-  FlatCard
+  FlatCard,
+  SmallLabel
 } from "./delivery-fold-components";
 //https://picsum.photos/id/400/400
 function RestaurantSmall(props) {
@@ -17,6 +18,7 @@ function RestaurantSmall(props) {
       <View style={styles.content}>
         <SubTitle text={props.name} />
         <Label text={props.description} />
+        <SmallLabel text={props.descriptionSmall} />
         <View style={styles.buttonRow}>
           <Button text={"dettagli"} onPress={props.onPressDetails} />
         </View>

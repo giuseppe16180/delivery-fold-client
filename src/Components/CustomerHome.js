@@ -47,8 +47,11 @@ class CustomerHome extends React.Component {
                 text={"Un po' di fame? Cerca tra i nostri ristoranti!"}
               />
               <View style={styles.searchView}>
-                <Input placeholder={"Cerca"}></Input>
-                <Button text={"🔎"} />
+                <Input
+                  placeholder={"Cerca"}
+                  onPress={this.provider.navigateSearch}
+                ></Input>
+                <Button text={"🔎"} onPress={this.provider.navigateSearch} />
               </View>
             </View>
           </FlatCard>

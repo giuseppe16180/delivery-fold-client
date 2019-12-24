@@ -31,6 +31,10 @@ export function Label(props) {
   return <Text style={styles.label}>{props.text}</Text>;
 }
 
+export function SmallLabel(props) {
+  return <Text style={styles.smallLabel}>{props.text}</Text>;
+}
+
 export function FooterCard(props) {
   return <View style={styles.footerCard}>{props.children}</View>;
 }
@@ -41,6 +45,7 @@ export function Input(props) {
       value={props.value}
       placeholder={props.placeholder}
       onChangeText={props.onChange}
+      onFocus={props.onPress}
       style={styles.input}
       secureTextEntry={props.hide}
     />
@@ -162,6 +167,7 @@ const styles = StyleSheet.create({
   },
   subTitle: { fontWeight: "bold", fontSize: "20px", margin: 6 },
   label: { fontWeight: "600", fontSize: "14px", margin: 6 },
+  smallLabel: { fontWeight: "400", fontSize: "10px", margin: 6 },
   button: {
     borderRadius: 2,
 

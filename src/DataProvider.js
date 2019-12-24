@@ -59,11 +59,16 @@ class DataProvider {
     };
 
     return new Promise((resolve, reject) => {
-      this.doPost("/cliente/login", data)
+      this.doPost("/login", data)
         .then(response => {
-          if (response.value != null) {
+          if (response.token != null) {
             sessionStorage.setItem("token", response.value);
-            this.navigateCustomerHome();
+            if(response.tipo === "cliente") {
+              this.navigateCustomerHome();
+            }
+            // else {
+            //   reindirizza alla home ristorante
+            // }
           } else {
             reject("LoginIncorrect");
           }

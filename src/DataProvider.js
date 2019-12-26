@@ -63,7 +63,7 @@ class DataProvider {
         .then(response => {
           if (response.token != null) {
             sessionStorage.setItem("token", response.value);
-            if(response.tipo === "cliente") {
+            if (response.tipo === "cliente") {
               this.navigateCustomerHome();
             }
             // else {
@@ -109,6 +109,31 @@ class DataProvider {
 
   navigateSearch() {
     window.location.href = "Search";
+  }
+
+  navigateRestaurantMenu(restaurant) {
+    sessionStorage.setItem("restaurant", restaurant);
+    window.location.href = "RestaurantMenu";
+  }
+
+  doGetRestaurant() {
+    const data = {
+      id: sessionStorage.getItem("restaurant")
+    };
+    return new Promise((resolve, reject) => {
+      this.doPost("/ristorante/get", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
   }
 }
 

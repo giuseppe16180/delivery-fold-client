@@ -103,6 +103,19 @@ class DataProvider {
     });
   }
 
+  getAllRestaurants()
+  {
+    console.debug("DataProvider", "getAllRestaurants");
+
+    return new Promise((resolve,reject) => {
+      fetch(this.setRoute("/ristorante/all"))
+        .then(response => response.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    });
+
+  }
+
   navigateCustomerHome() {
     window.location.href = "CustomerHome";
   }
@@ -121,7 +134,7 @@ class DataProvider {
       id: sessionStorage.getItem("restaurant")
     };
     return new Promise((resolve, reject) => {
-      this.doPost("/ristorante/get", data)
+      this.doPost("/ristorante/menu", data)
         .then(response => {
           if (response != null) {
             resolve(response);

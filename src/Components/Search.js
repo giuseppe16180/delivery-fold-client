@@ -21,7 +21,7 @@ class Search extends React.Component {
     console.debug("Search", "constructor");
     this.provider = new DataProvider();
     console.log("customer token", this.provider.token);
-    this.state = { query: null, results: null };
+    this.state = { query: null, results: this.handleSetup() };
     this.handleSearch = this.handleSearch.bind(this); // Era questo il problema   https://stackoverflow.com/questions/39176248/react-js-cant-read-property-of-undefined
   }
 
@@ -33,6 +33,20 @@ class Search extends React.Component {
     this.provider
       .doSearch(this.state.query)
       .then(response => this.setState({ results: response }))
+      .catch(error => {
+        console.log(error);
+        if (error == "NoResults") {
+          alert("Nessun Risultato");
+        } else if (error == "FailedToFetch") {
+          alert("impossibile contattare il server, prova più tardi");
+        }
+      });
+  }
+
+  handleSetup()
+  {
+    this.provider.getAllRestaurants()
+    .then(response => this.setState({ results: response }))
       .catch(error => {
         console.log(error);
         if (error == "NoResults") {

@@ -26,20 +26,20 @@ class RestaurantMenu extends React.Component {
       fotoMenu: null,
       descrizione: null,
       fotoLocale: null,
-      telelfono: null,
-      email: null,
+      telefono: null,
       mediaValutazioni: null,
+      orario: null,
       menu: []
     };
     this.provider.doGetRestaurant().then(response => {
       this.setState({
-        nome: response.nome,
-        indirizzo: response.indirizzo,
-        fotoMenu: response.fotoMenu,
-        descrizione: response.descrizione,
-        fotoLocale: response.fotoLocale,
-        telelfono: response.telelfono,
-        email: response.email,
+        nome: response.ristorante.nome,
+        indirizzo: response.ristorante.indirizzo,
+        fotoMenu: response.ristorante.fotoMenu,
+        descrizione: response.ristorante.descrizione,
+        fotoLocale: response.ristorante.fotoLocale,
+        telefono: response.ristorante.telelfono,
+        orario: response.ristorante.orario,
         mediaValutazioni: response.mediaValutazioni,
         menu: response.menu
       });

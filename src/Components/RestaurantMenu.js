@@ -10,7 +10,8 @@ import {
   Separator,
   FlatCard,
   HeaderCard,
-  FooterCard
+  FooterCard,
+  SmallLabel
 } from "./delivery-fold-components";
 import MenuEntry from "./MenuEntry";
 import DataProvider from "./../DataProvider";
@@ -21,25 +22,34 @@ class RestaurantMenu extends React.Component {
     console.debug("RestaurantMenu", "constructor");
     this.provider = new DataProvider();
     this.state = {
-      nome: null,
-      indirizzo: null,
-      fotoMenu: null,
-      descrizione: null,
-      fotoLocale: null,
-      telefono: null,
-      mediaValutazioni: null,
-      orario: null,
+      nome: "Nome",
+      indirizzo: "Indirizzo",
+      fotoMenu: "",
+      descrizione: "Descrizione",
+      fotoLocale: "",
+      telefono: "Telelfono",
+      mediaValutazioni: "Valutazione Media",
+      orario: "Orario d'apertura",
       menu: []
     };
     this.provider.doGetRestaurant().then(response => {
+      console.log(response);
+      const orari = response.ristorante.orario.split("/");
+      orari[0] = "Lun " + orari[0] + "     ";
+      orari[1] = "Mar " + orari[1] + "\n";
+      orari[2] = "Mer " + orari[2] + "     ";
+      orari[3] = "Gio " + orari[3] + "\n";
+      orari[4] = "Ven " + orari[4] + "     ";
+      orari[5] = "Sab " + orari[5] + "\n";
+      orari[6] = "Dom " + orari[6] + "     ";
       this.setState({
         nome: response.ristorante.nome,
         indirizzo: response.ristorante.indirizzo,
         fotoMenu: response.ristorante.fotoMenu,
         descrizione: response.ristorante.descrizione,
         fotoLocale: response.ristorante.fotoLocale,
-        telefono: response.ristorante.telelfono,
-        orario: response.ristorante.orario,
+        telefono: response.ristorante.telefono,
+        orario: orari,
         mediaValutazioni: response.mediaValutazioni,
         menu: response.menu
       });
@@ -51,7 +61,7 @@ class RestaurantMenu extends React.Component {
     return (
       <View>
         <HeaderCard>
-          <Title text={"DeliveryFood: " + this.state.name} />
+          <Title text={"DeliveryFood"} />
 
           <View style={styles.userPanel}>
             <Button text={"i tuoi ordini"} />
@@ -61,9 +71,28 @@ class RestaurantMenu extends React.Component {
 
         <Card>
           <FlatCard>
-            <SubTitle text={"cca ci va a descrizione " + this.description} />
+            <View style={styles.restaurantInfo}>
+              <Title text={this.state.nome} />
+              <Label text={this.state.indirizzo} />
+              <Label text={this.state.descrizione} />
+              <Label
+                text={
+                  "Email: " +
+                  this.state.descrizione +
+                  " - Tel. " +
+                  this.state.telefono
+                }
+              />
+              <SmallLabel text={this.state.orario} />
+            </View>
           </FlatCard>
           <Separator />
+          <FlatCard>
+            <View style={styles.suggestionsRow}>
+              <SubTitle text={"Menu"} />
+              <Label text={"Aggiungi al carrello i piatti che desideri"} />
+            </View>
+          </FlatCard>
           <FlatList
             data={this.state.menu}
             renderItem={({ item }) => (
@@ -91,6 +120,10 @@ class RestaurantMenu extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  restaurantInfo: {
+    flexDirection: "column"
+  },
+
   suggestionsRow: {
     flexDirection: "column"
   },

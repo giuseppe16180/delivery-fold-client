@@ -17,7 +17,7 @@ function MenuEntry(props) {
       <Image style={styles.image} source={props.image} />
       <View style={styles.content}>
         <SubTitle text={props.name} />
-        <Label text={props.description} />
+        <Label text={props.description + "€"} />
         <SmallLabel text={props.descriptionSmall} />
         <View style={styles.buttonRow}>
           <Button text={"Aggiungi al carrello"} onPress={props.onAddToChart} />

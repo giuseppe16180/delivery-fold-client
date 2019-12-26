@@ -167,7 +167,12 @@ const styles = StyleSheet.create({
   },
   subTitle: { fontWeight: "bold", fontSize: "20px", margin: 6 },
   label: { fontWeight: "600", fontSize: "14px", margin: 6 },
-  smallLabel: { fontWeight: "400", fontSize: "10px", margin: 6 },
+  smallLabel: {
+    fontWeight: "400",
+    fontSize: "12px",
+    margin: 6,
+    textAlign: "center"
+  },
   button: {
     borderRadius: 2,
 

@@ -90,7 +90,8 @@ class DataProvider {
     return new Promise((resolve, reject) => {
       this.doPost("/ristorante/find", data)
         .then(response => {
-          if (response != null) {
+          console.log(response);
+          if (response.lenght == 0) {
             resolve(response);
           } else {
             reject("NoResults");
@@ -103,15 +104,34 @@ class DataProvider {
     });
   }
 
+  doGet(route)
+  {
+    console.debug("DataProvider", "doGet", this.setRoute(route));
+    return new Promise((resolve, reject) => {
+      fetch(this.setRoute(route))
+        .then(response => response.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    });
+  }
+
   getAllRestaurants()
   {
     console.debug("DataProvider", "getAllRestaurants");
 
     return new Promise((resolve,reject) => {
-      fetch(this.setRoute("/ristorante/all"))
-        .then(response => response.json())
-        .then(data => resolve(data))
-        .catch(error => reject(error));
+      this.doGet("/ristorante/all")
+      .then(response => {
+        if (response != null) {
+          resolve(response);
+        } else {
+          reject("NoResults");
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        reject("FailedToFetch");
+      });
     });
 
   }

@@ -35,6 +35,10 @@ export function SmallLabel(props) {
   return <Text style={styles.smallLabel}>{props.text}</Text>;
 }
 
+export function VerySmallLabel(props) {
+  return <Text style={styles.verySmallLabel}>{props.text}</Text>;
+}
+
 export function FooterCard(props) {
   return <View style={styles.footerCard}>{props.children}</View>;
 }
@@ -81,6 +85,13 @@ export function Separator() {
 }
 
 const styles = StyleSheet.create({
+  verySmallLabel: {
+    color: "gray",
+    fontWeight: "200",
+    fontSize: "10px",
+    margin: 6,
+    textAlign: "center"
+  },
   headerCard: {
     paddingLeft: 24,
     paddingRight: 24,
@@ -170,8 +181,7 @@ const styles = StyleSheet.create({
   smallLabel: {
     fontWeight: "400",
     fontSize: "12px",
-    margin: 6,
-    textAlign: "center"
+    margin: 6
   },
   button: {
     borderRadius: 2,

@@ -35,8 +35,9 @@ class CustomerHome extends React.Component {
           <Title text={"DeliveryFood Home"} />
 
           <View style={styles.userPanel}>
-            <Button text={"i tuoi ordini"} />
-            <Button text={"il tuo profilo"} />
+            <Button text={"carrello 🛒"} />
+            <Button text={"i tuoi ordini 🍔"} />
+            <Button text={"il tuo profilo 👤"} />
           </View>
         </HeaderCard>
 

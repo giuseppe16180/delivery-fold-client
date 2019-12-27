@@ -11,16 +11,16 @@ import {
   SmallLabel
 } from "./delivery-fold-components";
 //https://picsum.photos/id/400/400
-function MenuEntry(props) {
+function CartEntry(props) {
   return (
     <FlatCard>
       <Image style={styles.image} source={props.image} />
       <View style={styles.content}>
         <SubTitle text={props.name} />
         <Label text={props.price + "€"} />
-        <SmallLabel text={props.description} />
+        <SmallLabel text={"Quantità: " + props.count} />
         <View style={styles.buttonRow}>
-          <Button text={"aggiungi al carrello"} onPress={props.onAddToChart} />
+          <Button text={"rimuovi"} onPress={props.onRemove} />
         </View>
       </View>
     </FlatCard>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MenuEntry;
+export default CartEntry;

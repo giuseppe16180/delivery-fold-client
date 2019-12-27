@@ -104,8 +104,7 @@ class DataProvider {
     });
   }
 
-  doGet(route)
-  {
+  doGet(route) {
     console.debug("DataProvider", "doGet", this.setRoute(route));
     return new Promise((resolve, reject) => {
       fetch(this.setRoute(route))
@@ -115,25 +114,23 @@ class DataProvider {
     });
   }
 
-  getAllRestaurants()
-  {
+  getAllRestaurants() {
     console.debug("DataProvider", "getAllRestaurants");
 
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       this.doGet("/ristorante/all")
-      .then(response => {
-        if (response != null) {
-          resolve(response);
-        } else {
-          reject("NoResults");
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        reject("FailedToFetch");
-      });
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
     });
-
   }
 
   navigateCustomerHome() {
@@ -149,12 +146,34 @@ class DataProvider {
     window.location.href = "RestaurantMenu";
   }
 
+  navigateCart() {
+    window.location.href = "Cart";
+  }
+
+  navigateCheckOut() {
+    window.location.href = "CheckOut";
+  }
+
+  navigateOrders() {
+    window.location.href = "Orders";
+  }
+
+  navigateCustomerProfile() {
+    window.location.href = "CustomerProfile";
+  }
+
+  doAddToCart(menuEntryId) {}
+
+  doGetCartEntries() {
+    return new Promise(); //TODO da terminare
+  }
+
   doGetRestaurant() {
     const data = {
       id: sessionStorage.getItem("restaurant")
     };
     return new Promise((resolve, reject) => {
-      this.doPost("/ristorante/menu", data)
+      this.doPost("ristorante/menu", data)
         .then(response => {
           if (response != null) {
             resolve(response);

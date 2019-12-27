@@ -3,6 +3,7 @@ import Login from "./Components/Login";
 import CustomerSignin from "./Components/CustomerSignin";
 import RestaurantMenu from "./Components/RestaurantMenu";
 import CustomerHome from "./Components/CustomerHome";
+import Cart from "./Components/Cart";
 import { AppRegistry, Text } from "react-native";
 import DataProvider from "./DataProvider";
 import Search from "./Components/Search";
@@ -32,6 +33,9 @@ class App extends React.Component {
         </Route>
         <Route path="/RestaurantMenu">
           <RestaurantMenu />
+        </Route>
+        <Route path="/Cart">
+          <Cart />
         </Route>
       </Router>
     );

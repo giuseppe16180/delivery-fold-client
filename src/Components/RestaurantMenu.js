@@ -11,7 +11,8 @@ import {
   FlatCard,
   HeaderCard,
   FooterCard,
-  SmallLabel
+  SmallLabel,
+  VerySmallLabel
 } from "./delivery-fold-components";
 import MenuEntry from "./MenuEntry";
 import DataProvider from "./../DataProvider";
@@ -32,6 +33,10 @@ class RestaurantMenu extends React.Component {
       orario: "Orario d'apertura",
       menu: []
     };
+  }
+
+  componentDidMount() {
+    console.debug("RestaurantMenu", "componentDidMount");
     this.provider.doGetRestaurant().then(response => {
       console.log(response);
       const orari = response.ristorante.orario.split("/");
@@ -60,15 +65,6 @@ class RestaurantMenu extends React.Component {
     console.debug("RestaurantMenu", "render");
     return (
       <View>
-        <HeaderCard>
-          <Title text={"DeliveryFood"} />
-
-          <View style={styles.userPanel}>
-            <Button text={"i tuoi ordini"} />
-            <Button text={"il tuo profilo"} />
-          </View>
-        </HeaderCard>
-
         <Card>
           <FlatCard>
             <View style={styles.restaurantInfo}>
@@ -83,7 +79,7 @@ class RestaurantMenu extends React.Component {
                   this.state.telefono
                 }
               />
-              <SmallLabel text={this.state.orario} />
+              <VerySmallLabel text={this.state.orario} />
             </View>
           </FlatCard>
           <Separator />
@@ -99,8 +95,9 @@ class RestaurantMenu extends React.Component {
               <MenuEntry
                 image={"https://picsum.photos/id/400/400"}
                 name={item.nome}
-                description={item.prezzo}
-                descriptionSmall={item.descrizione}
+                price={item.prezzo}
+                description={item.descrizione}
+                onAddToCart={() => this.provider.doAddToCart(item.id)} //TODO non so se funziona così
               />
             )}
             keyExtractor={item => item.id}

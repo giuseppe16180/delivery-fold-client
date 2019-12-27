@@ -162,9 +162,31 @@ class DataProvider {
     window.location.href = "CustomerProfile";
   }
 
-  doAddToCart(menuEntryId) {}
+  doAddToCart(menuEntryId) {
+    const data = {
+      token: this.token,
+      piatto: {
+        id: menuEntryId
+      }
+    };
 
-  doGetCartEntries() {
+    return new Promise((resolve, reject) => {
+      this.doPost("/cliente/carrello/add", data)
+        .then(response => {
+          if(respons != null){
+            resolve(response);
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }     
+
+  doGetCartEntries() {  
     return new Promise(); //TODO da terminare
   }
 

@@ -11,6 +11,7 @@ import {
   SmallLabel
 } from "./delivery-fold-components";
 //https://picsum.photos/id/400/400
+
 function CartEntry(props) {
   return (
     <FlatCard>

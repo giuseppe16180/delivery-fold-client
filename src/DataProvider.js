@@ -91,7 +91,7 @@ class DataProvider {
       this.doPost("/ristorante/find", data)
         .then(response => {
           console.log(response);
-          if (response.lenght == 0) {
+          if (response.lenght === 0) {
             resolve(response);
           } else {
             reject("NoResults");

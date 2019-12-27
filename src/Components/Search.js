@@ -61,7 +61,7 @@ class Search extends React.Component {
         <Card>
           <FlatCard>
             <View style={styles.searchRow}>
-              <SubTitle text={"Ecco i risultati della tua ricerca"} />
+              <SubTitle text={"Effettua una ricerca"} />
               <View style={styles.searchView}>
                 <Input
                   placeholder={"Cerca"}

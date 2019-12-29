@@ -78,21 +78,36 @@ class Search extends React.Component {
           </FlatCard>
           <FlatList
             data={this.state.results}
-            renderItem={({ item }) => (
-              <RestaurantSmall
-                image={"https://picsum.photos/id/400/400"}
-                name={item.ristorante.nome}
-                description={item.ristorante.indirizzo}
-                descriptionSmall={item.ristorante.orario}
-                onPressDetails={() =>
-                  this.handleRestaurantMenu(item.ristorante.id)
-                }
-              />
-            )}
+            renderItem={({ item }) => {
+              const orari = item.ristorante.orario.split("/");
+              orari[0] = "Lun " + orari[0] + " ";
+              orari[1] = "Mar " + orari[1] + "\n";
+              orari[2] = "Mer " + orari[2] + " ";
+              orari[3] = "Gio " + orari[3] + "\n";
+              orari[4] = "Ven " + orari[4] + " ";
+              orari[5] = "Sab " + orari[5] + "\n";
+              orari[6] = "Dom " + orari[6] + " ";
+              return (
+                <RestaurantSmall
+                  image={"https://picsum.photos/id/400/400"}
+                  name={item.ristorante.nome}
+                  description={
+                    item.ristorante.indirizzo +
+                    (item.mediaValutazioni == null
+                      ? ""
+                      : " - " + item.mediaValutazioni + "★")
+                  }
+                  descriptionSmall={orari}
+                  onPressDetails={() =>
+                    this.handleRestaurantMenu(item.ristorante.id)
+                  }
+                />
+              );
+            }}
             keyExtractor={item => item.ristorante.id}
           />
         </Card>
-        <Separator />
+        <Separator times={4} />
       </View>
     );
   }

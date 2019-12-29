@@ -74,8 +74,12 @@ class RestaurantMenu extends React.Component {
       <View>
         {/*HEADER*/}
         <HeaderCard>
-          <Title text={"DeliveryFood Home"} />
+          <Title text={"DeliveryFood Ricerca"} />
           <View style={styles.userPanel}>
+            <Button
+              text={"Home 🏠"}
+              onPress={this.provider.navigateCustomerHome}
+            />
             <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
             <Button text={"i tuoi ordini 🍔"} />
             <Button text={"il tuo profilo 👤"} />

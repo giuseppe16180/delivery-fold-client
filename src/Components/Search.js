@@ -22,13 +22,19 @@ class Search extends React.Component {
     this.provider = new DataProvider();
     console.log("customer token", this.provider.token);
     this.state = { query: null, results: null };
-    this.provider.getAllRestaurants().then(response => this.setState({results: response}));
+    this.provider
+      .getAllRestaurants()
+      .then(response => this.setState({ results: response }));
     this.handleSearch = this.handleSearch.bind(this); // Era questo il problema   https://stackoverflow.com/questions/39176248/react-js-cant-read-property-of-undefined
   }
 
   componentDidMount() {
     console.debug("Search", "componentDidMount");
   }
+
+  handleRestaurantMenu = id => {
+    this.provider.navigateRestaurantMenu(id);
+  };
 
   handleSearch() {
     this.provider
@@ -43,7 +49,6 @@ class Search extends React.Component {
         }
       });
   }
-
 
   render() {
     console.debug("Search", "render");
@@ -79,6 +84,9 @@ class Search extends React.Component {
                 name={item.ristorante.nome}
                 description={item.ristorante.indirizzo}
                 descriptionSmall={item.ristorante.orario}
+                onPressDetails={() =>
+                  this.handleRestaurantMenu(item.ristorante.id)
+                }
               />
             )}
             keyExtractor={item => item.ristorante.id}

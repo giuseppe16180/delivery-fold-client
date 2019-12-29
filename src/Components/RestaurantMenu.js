@@ -61,8 +61,11 @@ class RestaurantMenu extends React.Component {
     });
   }
 
-  handleAddToChart = id => {
-    this.provider.doAddToCart(id);
+  handleAddToCart = id => {
+    this.provider
+      .doAddToCart(id)
+      .then(alert("Aggiunto!"))
+      .catch(alert("Impossibile aggiungere, riprova più tardi"));
   };
 
   render() {
@@ -112,7 +115,7 @@ class RestaurantMenu extends React.Component {
                 name={item.nome}
                 price={item.prezzo}
                 description={item.descrizione}
-                onAddToCart={() => this.handleAddToChart(item.id)} //TODO non so se funziona così
+                onAddToCart={() => this.handleAddToCart(item.id)} //TODO non so se funziona così
               />
             )}
             keyExtractor={item => item.id}

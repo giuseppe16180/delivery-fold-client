@@ -28,6 +28,13 @@ class Cart extends React.Component {
 
   componentDidMount() {
     console.debug("Cart", "componentDidMount");
+    this.provider
+      .doGetCartEntries()
+      .then(response => {
+        console.debug("Cart", "doGetCartEntries", response);
+        this.setState({ total: response.totale, entries: response.piatti });
+      })
+      .catch(error => console.error(error));
   }
 
   render() {
@@ -59,13 +66,13 @@ class Cart extends React.Component {
           <Separator />
 
           <FlatList
-            data={this.state.menu}
+            data={this.state.entries}
             renderItem={({ item }) => (
               <CartEntry
-                image={item.image /* i nomi di sta cosa dipendono da bicè */}
-                name={item.name}
-                price={item.price}
-                count={item.count}
+                image={item.piatto.immagine}
+                name={item.piatto.nome}
+                price={item.piatto.prezzo}
+                count={item.quantita}
                 onRemove={() => {}}
               />
             )}

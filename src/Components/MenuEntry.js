@@ -20,7 +20,7 @@ function MenuEntry(props) {
         <Label text={props.price + "€"} />
         <SmallLabel text={props.description} />
         <View style={styles.buttonRow}>
-          <Button text={"aggiungi al carrello"} onPress={props.onAddToChart} />
+          <Button text={"aggiungi al carrello"} onPress={props.onAddToCart} />
         </View>
       </View>
     </FlatCard>

@@ -62,7 +62,7 @@ class DataProvider {
       this.doPost("/login", data)
         .then(response => {
           if (response.token != null) {
-            sessionStorage.setItem("token", response.value);
+            sessionStorage.setItem("token", response.token);
             if (response.tipo === "cliente") {
               this.navigateCustomerHome();
             }
@@ -162,6 +162,7 @@ class DataProvider {
   }
 
   doAddToCart(menuEntryId) {
+    console.debug("doAddToCart", menuEntryId);
     const data = {
       token: this.token,
       piatto: {
@@ -172,7 +173,7 @@ class DataProvider {
     return new Promise((resolve, reject) => {
       this.doPost("/cliente/carrello/add", data)
         .then(response => {
-          if(respons != null){
+          if (response != null) {
             resolve(response);
           } else {
             reject("NoResult");
@@ -183,10 +184,27 @@ class DataProvider {
           reject("FailedToFetch");
         });
     });
-  }     
+  }
 
-  doGetCartEntries() {  
-    return new Promise(); //TODO da terminare
+  doGetCartEntries() {
+    const data = {
+      value: this.token
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("cliente/carrello/get", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
   }
 
   doGetRestaurant() {

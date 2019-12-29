@@ -61,6 +61,10 @@ class RestaurantMenu extends React.Component {
     });
   }
 
+  handleAddToChart = id => {
+    this.provider.doAddToCart(id);
+  };
+
   render() {
     console.debug("RestaurantMenu", "render");
     return (
@@ -69,7 +73,7 @@ class RestaurantMenu extends React.Component {
         <HeaderCard>
           <Title text={"DeliveryFood Home"} />
           <View style={styles.userPanel}>
-            <Button text={"Carrello 🛒"} />
+            <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
             <Button text={"i tuoi ordini 🍔"} />
             <Button text={"il tuo profilo 👤"} />
           </View>
@@ -82,19 +86,12 @@ class RestaurantMenu extends React.Component {
               <Title text={this.state.nome} />
               <Label text={this.state.indirizzo} />
               <Label text={this.state.descrizione} />
-              <Label
-                text={
-                  "Email: " +
-                  this.state.descrizione +
-                  " - Tel. " +
-                  this.state.telefono
-                }
-              />
+              <Label text={"Tel. " + this.state.telefono} />
             </View>
             <View style={styles.restaurantInfoRight}>
               <VerySmallLabel text={this.state.orario} />
               <View style={styles.rating}>
-                <SubTitle text={"4.7★"} />
+                <SubTitle text={this.state.mediaValutazioni + "★"} />
               </View>
             </View>
           </FlatCard>
@@ -115,7 +112,7 @@ class RestaurantMenu extends React.Component {
                 name={item.nome}
                 price={item.prezzo}
                 description={item.descrizione}
-                onAddToCart={() => this.provider.doAddToCart(item.id)} //TODO non so se funziona così
+                onAddToCart={() => this.handleAddToChart(item.id)} //TODO non so se funziona così
               />
             )}
             keyExtractor={item => item.id}

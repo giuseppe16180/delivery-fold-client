@@ -22,7 +22,15 @@ class CheckOut extends React.Component {
     this.provider = new DataProvider();
     this.state = {
       total: 0.0,
-      isDeliveryOrder: true
+      isDeliveryOrder: true,
+      indirizzoFatturazione: null,
+      intestatario: null,
+      numeroCarta: null,
+      ccv: null,
+      scadenza: null,
+      indirizzo: null,
+      numPersone: 0,
+      orario: null
     };
   }
 
@@ -37,9 +45,37 @@ class CheckOut extends React.Component {
   }
 
   handleCheckOut = () => {
+    const data = {
+      ordine: {
+        data: new Date(),
+        commento: "",
+        tipo: this.state.isDeliveryOrder
+      },
+      domicilio: {
+        indirizzo: this.state.indirizzo
+      },
+      carta: {
+        indirizzo: this.state.indirizzoFatturazione,
+        intestatario: this.state.intestatario,
+        numero: this.state.numeroCarta,
+        scadenza: this.state.scadenza
+      },
+      prenotazione: null,
+      cvv: this.state.ccv
+    };
+
+    if (!this.state.isDeliveryOrder) {
+      data.ordine.tipo = this.state.isDeliveryOrder;
+      data.domicilio = null;
+      data.prenotazione = {
+        num_persone: this.state.numPersone,
+        orario: this.state.orario
+      };
+    }
+
     this.provider
-      .doCheckOut()
-      .then(alert("Ordine completato!"))
+      .doCheckOut(data)
+      .then(result => alert("Ordine completato!", result.value))
       .catch("Riprova più tardi");
   };
 
@@ -68,8 +104,10 @@ class CheckOut extends React.Component {
                 <Label text={"Inserisci il tuo indirizzo di fatturazione:"} />
                 <View style={{ width: "50%" }}>
                   <Input
-                    placeholder={"indirzzo"}
-                    onChange={text => this.setState({ email: text })}
+                    placeholder={"indirizzo"}
+                    onChange={text =>
+                      this.setState({ indirizzoFatturazione: text })
+                    }
                   />
                 </View>
               </View>
@@ -78,7 +116,7 @@ class CheckOut extends React.Component {
                 <View style={{ width: "50%" }}>
                   <Input
                     placeholder={"nome e cognome"}
-                    onChange={text => this.setState({ email: text })}
+                    onChange={text => this.setState({ intestatario: text })}
                   />
                 </View>
               </View>
@@ -87,19 +125,19 @@ class CheckOut extends React.Component {
                 <View style={{ width: "50%" }}>
                   <Input
                     placeholder={"numero di carta"}
-                    onChange={text => this.setState({ email: text })}
+                    onChange={text => this.setState({ numeroCarta: text })}
                   />
                 </View>
                 <View style={{ width: "10%" }}>
                   <Input
                     placeholder={"CCV"}
-                    onChange={text => this.setState({ email: text })}
+                    onChange={text => this.setState({ ccv: text })}
                   />
                 </View>
                 <View style={{ width: "15%" }}>
                   <Input
                     placeholder={"scadenza"}
-                    onChange={text => this.setState({ email: text })}
+                    onChange={text => this.setState({ scadenza: text })}
                   />
                 </View>
               </View>
@@ -151,8 +189,8 @@ class CheckOut extends React.Component {
                   <Label text={"Inserisci l'indirizzo di consegna:"} />
                   <View style={{ width: "40%" }}>
                     <Input
-                      placeholder={"indirzzo"}
-                      onChange={text => this.setState({ email: text })}
+                      placeholder={"indirizzo"}
+                      onChange={text => this.setState({ indirizzo: text })}
                     />
                   </View>
                 </View>
@@ -174,13 +212,13 @@ class CheckOut extends React.Component {
                     <View style={{ width: "40%" }}>
                       <Input
                         placeholder={"numero presone"}
-                        onChange={text => this.setState({ email: text })}
+                        onChange={text => this.setState({ numPersone: text })}
                       />
                     </View>
                     <View style={{ width: "40%" }}>
                       <Input
                         placeholder={"orario"}
-                        onChange={text => this.setState({ email: text })}
+                        onChange={text => this.setState({ orario: text })}
                       />
                     </View>
                   </View>
@@ -194,10 +232,7 @@ class CheckOut extends React.Component {
                 <SubTitle text={"Completa l'ordine!"} />
                 <Label text={"Totale " + this.state.total + "€"} />
               </View>
-              <Button
-                text={"Conferma"}
-                onPress={this.provider.navigateCheckOut}
-              />
+              <Button text={"Conferma"} onPress={this.handleCheckOut} />
             </View>
           </FlatCard>
         </Card>

@@ -213,6 +213,40 @@ class DataProvider {
     });
   }
 
+  doCheckOut(data) {
+    if (data.ordine.tipo) {
+      return new Promise((resolve, reject) => {
+        this.doPost("cliente/ordini/domicilio/add", data)
+          .then(response => {
+            if (response != null) {
+              resolve(response);
+            } else {
+              reject("NoResults");
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            reject("FailedToFetch");
+          });
+      });
+    } else {
+      return new Promise((resolve, reject) => {
+        this.doPost("cliente/ordini/prenotazione/add", data)
+          .then(response => {
+            if (response != null) {
+              resolve(response);
+            } else {
+              reject("NoResults");
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            reject("FailedToFetch");
+          });
+      });
+    }
+  }
+
   doGetCartEntries() {
     const data = {
       value: this.token

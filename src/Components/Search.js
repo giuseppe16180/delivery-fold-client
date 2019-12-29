@@ -92,14 +92,6 @@ class Search extends React.Component {
             keyExtractor={item => item.ristorante.id}
           />
         </Card>
-
-        <FooterCard>
-          <Label
-            text={
-              "DeliveryFood - 2020 - Gruppo 8 Progetto Ingegneria del Software"
-            }
-          />
-        </FooterCard>
       </View>
     );
   }

@@ -12,6 +12,40 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 56px;
+  right: 30px;
+  z-index: 99;
+  font-size: 28px;
+  border: none;
+  outline: none;
+  background-color: #ff7733;
+  color: black;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

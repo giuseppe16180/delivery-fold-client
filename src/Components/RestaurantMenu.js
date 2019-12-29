@@ -65,7 +65,7 @@ class RestaurantMenu extends React.Component {
     this.provider
       .doAddToCart(id)
       .then(alert("Aggiunto!"))
-      .catch(alert("Impossibile aggiungere, riprova più tardi"));
+      .catch(error => alert(error));
   };
 
   render() {

@@ -81,14 +81,6 @@ class CustomerHome extends React.Component {
             description={"wegwrg3h"}
           />
         </Card>
-
-        <FooterCard>
-          <Label
-            text={
-              "DeliveryFood - 2020 - Gruppo 8 Progetto Ingegneria del Software"
-            }
-          />
-        </FooterCard>
       </View>
     );
   }

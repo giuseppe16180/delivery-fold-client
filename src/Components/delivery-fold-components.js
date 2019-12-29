@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   Text,
   View,
-  TextInput
+  TextInput,
+  CheckBox
 } from "react-native";
 
 export function Card(props) {
@@ -78,6 +79,10 @@ export function Button(props) {
       onPress={props.onPress}
     />
   );
+}
+
+export function Checkbox(props) {
+  return <CheckBox value={props.isChecked} onChange={props.onPress} />;
 }
 
 export function Separator(props) {

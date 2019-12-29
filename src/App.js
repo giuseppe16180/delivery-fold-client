@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./Components/Login";
 import CustomerSignin from "./Components/CustomerSignin";
 import RestaurantMenu from "./Components/RestaurantMenu";
+import CheckOut from "./Components/CheckOut";
 import CustomerHome from "./Components/CustomerHome";
 import Cart from "./Components/Cart";
 import { AppRegistry, Text } from "react-native";
@@ -36,6 +37,9 @@ class App extends React.Component {
         </Route>
         <Route path="/Cart">
           <Cart />
+        </Route>
+        <Route path="/CheckOut">
+          <CheckOut />
         </Route>
       </Router>
     );

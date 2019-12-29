@@ -6,7 +6,8 @@ import {
   SubTitle,
   Label,
   Title,
-  Input
+  Input,
+  Separator
 } from "./delivery-fold-components";
 import DataProvider from "./../DataProvider";
 
@@ -42,34 +43,39 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Card>
-        <Title text={"Benvenuto in DeliveryFood"} />
-        <SubTitle
-          text={"Inserisci le tue credenziali per accedere al servizio"}
-        />
-        <View style={styles.formRow}>
-          <Label text={"Inserisci la tua email:"} />
-          <View style={{ width: "50%" }}>
-            <Input
-              placeholder={"email"}
-              onChange={text => this.setState({ email: text })}
-            />
+      <View>
+        <Separator />
+        <Separator />
+        <Separator />
+        <Card>
+          <Title text={"Benvenuto in DeliveryFood"} />
+          <SubTitle
+            text={"Inserisci le tue credenziali per accedere al servizio"}
+          />
+          <View style={styles.formRow}>
+            <Label text={"Inserisci la tua email:"} />
+            <View style={{ width: "50%" }}>
+              <Input
+                placeholder={"email"}
+                onChange={text => this.setState({ email: text })}
+              />
+            </View>
           </View>
-        </View>
-        <View style={styles.formRow}>
-          <Label text={"Inserisci la tua password:"} />
-          <View style={{ width: "50%" }}>
-            <Input
-              placeholder={"password"}
-              hide={true}
-              onChange={text => this.setState({ password: text })}
-            />
+          <View style={styles.formRow}>
+            <Label text={"Inserisci la tua password:"} />
+            <View style={{ width: "50%" }}>
+              <Input
+                placeholder={"password"}
+                hide={true}
+                onChange={text => this.setState({ password: text })}
+              />
+            </View>
           </View>
-        </View>
-        <View style={styles.submitButton}>
-          <Button text={"ACCEDI"} onPress={this.handleSubmit} />
-        </View>
-      </Card>
+          <View style={styles.submitButton}>
+            <Button text={"ACCEDI"} onPress={this.handleSubmit} />
+          </View>
+        </Card>
+      </View>
     );
   }
 }

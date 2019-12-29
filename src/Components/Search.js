@@ -92,6 +92,7 @@ class Search extends React.Component {
             keyExtractor={item => item.ristorante.id}
           />
         </Card>
+        <Separator />
       </View>
     );
   }

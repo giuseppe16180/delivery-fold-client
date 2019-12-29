@@ -79,6 +79,7 @@ class Cart extends React.Component {
             keyExtractor={item => item.id}
           />
         </Card>
+        <Separator />
       </View>
     );
   }

@@ -81,6 +81,7 @@ class CustomerHome extends React.Component {
             description={"wegwrg3h"}
           />
         </Card>
+        <Separator />
       </View>
     );
   }

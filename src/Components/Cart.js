@@ -37,6 +37,20 @@ class Cart extends React.Component {
       .catch(error => console.error(error));
   }
 
+  handleRemove = id => {
+    this.provider
+      .doRemoveCartEntry(id, 1)
+      .then(alert("Rimosso"))
+      .catch("Riprova più tardi");
+  };
+
+  handleRemoveQuantity = (id, quantity) => {
+    this.provider
+      .doRemoveCartEntry(id, quantity)
+      .then(alert("Rimosso tutto"))
+      .catch("Riprova più tardi");
+  };
+
   render() {
     console.debug("Cart", "render");
     return (
@@ -44,7 +58,10 @@ class Cart extends React.Component {
         <HeaderCard>
           <Title text={"DeliveryFood Carrello"} />
           <View style={styles.userPanel}>
-            <Button text={"Home 🏠"} />
+            <Button
+              text={"Home 🏠"}
+              onPress={this.provider.navigateCustomerHome}
+            />
             <Button text={"i tuoi ordini 🍔"} />
             <Button text={"il tuo profilo 👤"} />
           </View>
@@ -73,13 +90,16 @@ class Cart extends React.Component {
                 name={item.piatto.nome}
                 price={item.piatto.prezzo}
                 count={item.quantita}
-                onRemove={() => {}}
+                onRemove={() => this.handleRemove(item.piatto.id)}
+                onRemoveQuantity={() =>
+                  this.handleRemoveQuantity(item.piatto.id, item.quantita)
+                }
               />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.piatto.id}
           />
         </Card>
-        <Separator />
+        <Separator times={4} />
       </View>
     );
   }

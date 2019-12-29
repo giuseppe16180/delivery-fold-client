@@ -114,6 +114,7 @@ class DataProvider {
   }
 
   getAllRestaurants() {
+    //todo mettere il do
     console.debug("DataProvider", "getAllRestaurants");
 
     return new Promise((resolve, reject) => {
@@ -177,6 +178,32 @@ class DataProvider {
             resolve(response);
           } else {
             reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }
+
+  doRemoveCartEntry(id, quantity) {
+    const data = {
+      token: this.token,
+      piatto: {
+        id: id
+      },
+      quantita: quantity
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("cliente/carrello/remove", data)
+        .then(response => {
+          if (response != null) {
+            resolve();
+            this.navigateCart();
+          } else {
+            reject("NoResults");
           }
         })
         .catch(error => {

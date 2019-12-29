@@ -47,6 +47,7 @@ class Login extends React.Component {
         <Separator />
         <Separator />
         <Separator />
+        <Separator />
         <Card>
           <Title text={"Benvenuto in DeliveryFood"} />
           <SubTitle

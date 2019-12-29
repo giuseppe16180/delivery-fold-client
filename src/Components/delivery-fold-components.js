@@ -80,8 +80,13 @@ export function Button(props) {
   );
 }
 
-export function Separator() {
-  return <View style={styles.separator}></View>;
+export function Separator(props) {
+  console.log("times", props.times);
+  return (
+    <View
+      style={{ marginTop: 18 * (props.times == undefined ? 1 : props.times) }}
+    ></View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -124,9 +129,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 12,
     elevation: 12
-  },
-  separator: {
-    marginTop: 18
   },
   flatCard: {
     margin: 6,

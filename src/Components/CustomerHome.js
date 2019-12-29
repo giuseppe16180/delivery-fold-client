@@ -35,7 +35,7 @@ class CustomerHome extends React.Component {
           <Title text={"DeliveryFood Home"} />
 
           <View style={styles.userPanel}>
-            <Button text={"carrello 🛒"} />
+            <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
             <Button text={"i tuoi ordini 🍔"} />
             <Button text={"il tuo profilo 👤"} />
           </View>
@@ -61,7 +61,9 @@ class CustomerHome extends React.Component {
             <View style={styles.suggestionsRow}>
               <SubTitle text={"Ecco i nostri suggerimenti"} />
               <Label
-                text={"Perché non dai uno sguardo alle offerte del giorno?"}
+                text={
+                  "Perché non dai uno sguardo alle offerte speciali a te riservate?"
+                }
               />
             </View>
           </FlatCard>
@@ -81,7 +83,7 @@ class CustomerHome extends React.Component {
             description={"wegwrg3h"}
           />
         </Card>
-        <Separator />
+        <Separator times={4} />
       </View>
     );
   }

@@ -22,6 +22,7 @@ function CartEntry(props) {
         <SmallLabel text={"Quantità: " + props.count} />
         <View style={styles.buttonRow}>
           <Button text={"rimuovi"} onPress={props.onRemove} />
+          <Button text={"rimuovi tutto"} onPress={props.onRemoveQuantity} />
         </View>
       </View>
     </FlatCard>

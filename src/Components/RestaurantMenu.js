@@ -94,7 +94,13 @@ class RestaurantMenu extends React.Component {
             <View style={styles.restaurantInfoRight}>
               <VerySmallLabel text={this.state.orario} />
               <View style={styles.rating}>
-                <SubTitle text={this.state.mediaValutazioni + "★"} />
+                <SubTitle
+                  text={
+                    this.state.mediaValutazioni == null
+                      ? "Nessuna Valutazione"
+                      : this.state.mediaValutazioni + "★"
+                  }
+                />
               </View>
             </View>
           </FlatCard>
@@ -121,7 +127,7 @@ class RestaurantMenu extends React.Component {
             keyExtractor={item => item.id}
           />
         </Card>
-        <Footer />
+        <Separator times={4} />
       </View>
     );
   }

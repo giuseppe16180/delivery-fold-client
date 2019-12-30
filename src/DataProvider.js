@@ -287,6 +287,30 @@ class DataProvider {
         });
     });
   }
+
+  getAllOrders() {
+    const data = {
+      token: this.token
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("/clienti/ordini/all", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }
+
 }
+
+
 
 export default DataProvider;

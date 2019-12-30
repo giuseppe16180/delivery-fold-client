@@ -290,7 +290,7 @@ class DataProvider {
 
   getAllOrders() {
     const data = {
-      token: this.token
+      value: this.token
     };
 
     return new Promise((resolve, reject) => {

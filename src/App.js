@@ -10,6 +10,7 @@ import DataProvider from "./DataProvider";
 import Search from "./Components/Search";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "./Components/delivery-fold-components";
+import OrdersHistory from "./Components/OrdersHistory";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,9 @@ class App extends React.Component {
         </Route>
         <Route path="/RestaurantMenu">
           <RestaurantMenu />
+          </Route>
+        <Route path="/OrdersHistory">
+          <OrdersHistory />
         </Route>
         <Route path="/Cart">
           <Cart />

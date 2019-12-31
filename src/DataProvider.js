@@ -294,7 +294,7 @@ class DataProvider {
     };
 
     return new Promise((resolve, reject) => {
-      this.doPost("/clienti/ordini/all", data)
+      this.doPost("/cliente/ordini/all", data)
         .then(response => {
           if (response != null) {
             resolve(response);

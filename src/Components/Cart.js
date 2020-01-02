@@ -62,7 +62,7 @@ class Cart extends React.Component {
               text={"Home 🏠"}
               onPress={this.provider.navigateCustomerHome}
             />
-            <Button text={"i tuoi ordini 🍔"} />
+            <Button text={"i tuoi ordini 🍔"} onPress={this.provider.navigateOrders}/>
             <Button text={"il tuo profilo 👤"} />
           </View>
         </HeaderCard>

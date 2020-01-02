@@ -81,7 +81,7 @@ class RestaurantMenu extends React.Component {
               onPress={this.provider.navigateCustomerHome}
             />
             <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
-            <Button text={"i tuoi ordini 🍔"} />
+            <Button text={"i tuoi ordini 🍔"} onPress={this.provider.navigateOrders}/>
             <Button text={"il tuo profilo 👤"} />
           </View>
         </HeaderCard>

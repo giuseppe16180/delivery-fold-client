@@ -48,7 +48,12 @@ class OrderHistory extends React.Component {
         <HeaderCard>
           <Title text={"DeliveryFood Ordini"} />
           <View style={styles.userPanel}>
-            <Button text={"il tuo profilo"} />
+          <Button
+              text={"Home 🏠"}
+              onPress={this.provider.navigateCustomerHome}
+            />
+            <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
+            <Button text={"il tuo profilo 👤"} />
           </View>
     
         </HeaderCard>

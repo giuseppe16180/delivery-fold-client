@@ -58,7 +58,7 @@ class Search extends React.Component {
           <Title text={"DeliveryFood Ricerca"} />
 
           <View style={styles.userPanel}>
-            <Button text={"i tuoi ordini"} />
+          <Button text={"i tuoi ordini 🍔"} onPress={this.provider.navigateOrders}/>
             <Button text={"il tuo profilo"} />
           </View>
         </HeaderCard>

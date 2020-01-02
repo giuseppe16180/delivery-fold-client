@@ -309,6 +309,10 @@ class DataProvider {
     });
   }
 
+  navigateOrders() {
+    window.location.href = "OrdersHistory";
+  }
+
 }
 
 

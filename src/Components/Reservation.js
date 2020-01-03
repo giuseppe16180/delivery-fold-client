@@ -22,14 +22,14 @@ class Reservation extends React.Component {
     console.debug("Reservation", "constructor");
     this.provider = new DataProvider();
     this.state = {
-        id: "id",
-        num_persone: "num_persone",
-        orario: "orario",
-        data: "data",
-        stato: "stato",
-        ristoranti: [],
-        totale: "totale",
-        piatti: []
+      id: "id",
+      num_persone: "num_persone",
+      orario: "orario",
+      data: "data",
+      stato: "stato",
+      ristoranti: [],
+      totale: "totale",
+      piatti: []
     };
   }
 
@@ -50,7 +50,6 @@ class Reservation extends React.Component {
     });
   }
 
-
   render() {
     console.debug("Reservation", "render");
     return (
@@ -63,15 +62,27 @@ class Reservation extends React.Component {
               onPress={this.provider.navigateCustomerHome}
             />
             <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
-            <Button text={"i tuoi ordini 🍔"} onPress={this.provider.navigateOrders}/>
-            <Button text={"il tuo profilo 👤"} />
+            {!this.provider.isGuest() && (
+              <Button
+                text={"i tuoi ordini 🍔"}
+                onPress={this.provider.navigateOrders}
+              />
+            )}
+            {!this.provider.isGuest() && (
+              <Button
+                text={"il tuo profilo 👤"}
+                onPress={this.provider.navigateCustomerProfile}
+              />
+            )}
           </View>
         </HeaderCard>
         <Card>
           <FlatCard>
             <View style={styles.restaurantInfoLeft}>
               <Title text={"Prenotazione Tavolo, Ristoranteeeeee"} />
-              <SubTitle text={"Numero persone prenotazione: " + this.state.num_persone} />
+              <SubTitle
+                text={"Numero persone prenotazione: " + this.state.num_persone}
+              />
               <SubTitle text={"Orario: " + this.state.orario} />
               <SubTitle text={"Totale €" + this.state.totale} />
               <Label text={this.state.data} />

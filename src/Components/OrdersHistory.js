@@ -21,29 +21,25 @@ class OrderHistory extends React.Component {
     console.debug("OrderHistory", "constructor");
     this.provider = new DataProvider();
     console.log("customer token", this.provider.token);
-      this.state = {
-          ordini: []
-      }
+    this.state = {
+      ordini: []
+    };
   }
 
   componentDidMount() {
     console.debug("OrdersHistory", "componentDidMount");
-    this.provider
-    .getAllOrders()
-    .then(response => {
-        console.log(response);
-        this.setState({
-          ordini: response
+    this.provider.getAllOrders().then(response => {
+      console.log(response);
+      this.setState({
+        ordini: response
       });
     });
   }
 
-  handleOrder (id, tipo) {
-    if(tipo)
-      this.provider.getOrder(id);
-    else
-    this.provider.getReservation(id);
-  };
+  handleOrder(id, tipo) {
+    if (tipo) this.provider.getOrder(id);
+    else this.provider.getReservation(id);
+  }
 
   render() {
     return (
@@ -51,17 +47,26 @@ class OrderHistory extends React.Component {
         <HeaderCard>
           <Title text={"DeliveryFood Ordini"} />
           <View style={styles.userPanel}>
-          <Button
+            <Button
               text={"Home 🏠"}
               onPress={this.provider.navigateCustomerHome}
             />
-            <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
-            <Button text={"il tuo profilo 👤"} />
+            {!this.provider.isGuest() && (
+              <Button
+                text={"i tuoi ordini 🍔"}
+                onPress={this.provider.navigateOrders}
+              />
+            )}
+            {!this.provider.isGuest() && (
+              <Button
+                text={"il tuo profilo 👤"}
+                onPress={this.provider.navigateCustomerProfile}
+              />
+            )}
           </View>
-    
         </HeaderCard>
         <Card>
-        <FlatList
+          <FlatList
             data={this.state.ordini}
             renderItem={({ item }) => (
               <OrderSmall

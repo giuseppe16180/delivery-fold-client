@@ -30,7 +30,11 @@ class CheckOut extends React.Component {
       scadenza: null,
       indirizzo: null,
       numPersone: 0,
-      orario: null
+      orario: null,
+      recapitoNome: null,
+      reacpitoCognome: null,
+      reacpitoEmail: null,
+      recapitoTelefono: null
     };
   }
 
@@ -91,13 +95,13 @@ class CheckOut extends React.Component {
               onPress={this.provider.navigateCustomerHome}
             />
             <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
-            {!this.provider.isGuest && (
+            {!this.provider.isGuest() && (
               <Button
                 text={"i tuoi ordini 🍔"}
                 onPress={this.provider.navigateOrders}
               />
             )}
-            {!this.provider.isGuest && (
+            {!this.provider.isGuest() && (
               <Button
                 text={"il tuo profilo 👤"}
                 onPress={this.provider.navigateCustomerProfile}
@@ -153,6 +157,7 @@ class CheckOut extends React.Component {
               </View>
             </View>
           </FlatCard>
+
           <FlatCard>
             <View style={styles.forms}>
               <SubTitle text={"Dettagli ordine"} />
@@ -213,29 +218,68 @@ class CheckOut extends React.Component {
                 }}
                 pointerEvents={this.state.isDeliveryOrder ? "none" : "auto"}
               >
-                <View style={styles.formRow}>
-                  <Label text={"Inserisci i dettagli della prenotazione:"} />
+                {!this.provider.isGuest() && (
+                  <View style={styles.formRow}>
+                    <Label text={"Inserisci i dettagli della prenotazione:"} />
 
-                  <View
-                    style={{ flexDirection: "row", justifyContent: "flex-end" }}
-                  >
-                    <View style={{ width: "40%" }}>
-                      <Input
-                        placeholder={"numero presone"}
-                        onChange={text => this.setState({ numPersone: text })}
-                      />
-                    </View>
-                    <View style={{ width: "40%" }}>
-                      <Input
-                        placeholder={"orario"}
-                        onChange={text => this.setState({ orario: text })}
-                      />
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "flex-end"
+                      }}
+                    >
+                      <View style={{ width: "35%" }}>
+                        <Input
+                          placeholder={"numero presone"}
+                          onChange={text => this.setState({ numPersone: text })}
+                        />
+                      </View>
+                      <View style={{ width: "30%" }}>
+                        <Input
+                          placeholder={"orario"}
+                          onChange={text => this.setState({ orario: text })}
+                        />
+                      </View>
                     </View>
                   </View>
-                </View>
+                )}
               </View>
+              {this.provider.isGuest() && (
+                <View style={styles.formRow}>
+                  <Label text={"Inserisci recapiti:"} />
+                  <View style={{ width: "20%" }}>
+                    <Input
+                      placeholder={"nome"}
+                      onChange={text => this.setState({ recapitoNome: text })}
+                    />
+                  </View>
+                  <View style={{ width: "20%" }}>
+                    <Input
+                      placeholder={"cognome"}
+                      onChange={text =>
+                        this.setState({ reacpitoCognome: text })
+                      }
+                    />
+                  </View>
+                  <View style={{ width: "20%" }}>
+                    <Input
+                      placeholder={"email"}
+                      onChange={text => this.setState({ reacpitoEmail: text })}
+                    />
+                  </View>
+                  <View style={{ width: "20%" }}>
+                    <Input
+                      placeholder={"telefono"}
+                      onChange={text =>
+                        this.setState({ recapitoTelefono: text })
+                      }
+                    />
+                  </View>
+                </View>
+              )}
             </View>
           </FlatCard>
+
           <FlatCard>
             <View style={styles.searchRow}>
               <View style={styles.suggestionsRow}>

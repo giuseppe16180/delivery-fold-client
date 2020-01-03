@@ -33,7 +33,7 @@ class CustomerHome extends React.Component {
       <View>
         <HeaderCard>
           <Title text={"DeliveryFood Home"} />
-          {!this.provider.isGuest && (
+          {!this.provider.isGuest() && (
             <View style={styles.userPanel} sho>
               <Button
                 text={"Carrello 🛒"}

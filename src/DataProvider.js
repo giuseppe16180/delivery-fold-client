@@ -351,53 +351,50 @@ class DataProvider {
         id: sessionStorage.getItem("id")
       }
     };
-      return new Promise((resolve, reject) => {
-        this.doPost("cliente/ordini/domicilio/details", data)
-          .then(response => {
-            if (response != null) {
-              resolve(response);
-            } else {
-              reject("NoResult");
-            }
-          })
-          .catch(error => {
-            console.error(error);
-            reject("FailedToFetch");
-          });
-      });
-    }
+    return new Promise((resolve, reject) => {
+      this.doPost("cliente/ordini/domicilio/details", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }
 
-    getReservation(resv) {
-      sessionStorage.setItem("id", resv);
-      window.location.href = "Reservation";
-    }
+  getReservation(resv) {
+    sessionStorage.setItem("id", resv);
+    window.location.href = "Reservation";
+  }
 
-    getReservationOrder(){
-      const data = {
-        token: this.token,
-        ordine: {
-          id: sessionStorage.getItem("id")
-        }
-      };
+  getReservationOrder() {
+    const data = {
+      token: this.token,
+      ordine: {
+        id: sessionStorage.getItem("id")
+      }
+    };
 
-      return new Promise((resolve, reject) => {
-        this.doPost("cliente/ordini/prenotazione/details", data)
-          .then(response => {
-            if (response != null) {
-              resolve(response);
-            } else {
-              reject("NoResult");
-            }
-          })
-          .catch(error => {
-            console.error(error);
-            reject("FailedToFetch");
-          });
-      });
-    }
-    
-
-
+    return new Promise((resolve, reject) => {
+      this.doPost("cliente/ordini/prenotazione/details", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }
 }
 
 export default DataProvider;

@@ -91,7 +91,7 @@ class Login extends React.Component {
                   </View>
                 </View>
                 <View style={styles.submitButton}>
-                  <Button text={"Accedi"} onPress={this.handleSubmit} />
+                  <Button text={"Accedi"} onPress={this.handleLogin} />
                 </View>
               </View>
             </FlatCard>

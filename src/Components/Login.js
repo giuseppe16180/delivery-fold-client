@@ -7,7 +7,9 @@ import {
   Label,
   Title,
   Input,
-  Separator
+  Separator,
+  FlatCard,
+  HeaderCard
 } from "./delivery-fold-components";
 import DataProvider from "./../DataProvider";
 
@@ -22,7 +24,7 @@ class Login extends React.Component {
     };
   }
 
-  handleSubmit = () => {
+  handleLogin = () => {
     console.debug(
       "Login",
       "handleSubmit",
@@ -41,47 +43,80 @@ class Login extends React.Component {
       });
   };
 
+  handleGuestLogin = () => {};
+  handleSignin = () => {};
+
   render() {
     return (
       <View>
-        <Separator />
-        <Separator />
-        <Separator />
-        <Separator />
-        <Card>
+        <HeaderCard>
           <Title text={"Benvenuto in DeliveryFood"} />
-          <SubTitle
-            text={"Inserisci le tue credenziali per accedere al servizio"}
-          />
-          <View style={styles.formRow}>
-            <Label text={"Inserisci la tua email:"} />
-            <View style={{ width: "50%" }}>
-              <Input
-                placeholder={"email"}
-                onChange={text => this.setState({ email: text })}
-              />
-            </View>
-          </View>
-          <View style={styles.formRow}>
-            <Label text={"Inserisci la tua password:"} />
-            <View style={{ width: "50%" }}>
-              <Input
-                placeholder={"password"}
-                hide={true}
-                onChange={text => this.setState({ password: text })}
-              />
-            </View>
-          </View>
-          <View style={styles.submitButton}>
-            <Button text={"ACCEDI"} onPress={this.handleSubmit} />
-          </View>
-        </Card>
+        </HeaderCard>
+        <Separator times={1} />
+        <View style={styles.small}>
+          <Card>
+            <FlatCard>
+              <View style={styles.mammaRow}>
+                <SubTitle
+                  text={"Inserisci le tue credenziali per accedere al servizio"}
+                />
+                <View style={styles.formRow}>
+                  <Label text={"Inserisci la tua email:"} />
+                  <View style={{ width: "50%" }}>
+                    <Input
+                      placeholder={"email"}
+                      onChange={text => this.setState({ email: text })}
+                    />
+                  </View>
+                </View>
+                <View style={styles.formRow}>
+                  <Label text={"Inserisci la tua password:"} />
+                  <View style={{ width: "50%" }}>
+                    <Input
+                      placeholder={"password"}
+                      hide={true}
+                      onChange={text => this.setState({ password: text })}
+                    />
+                  </View>
+                </View>
+                <View style={styles.submitButton}>
+                  <Button text={"Accedi"} onPress={this.handleSubmit} />
+                </View>
+              </View>
+            </FlatCard>
+            <FlatCard>
+              <View style={styles.mammaRow}>
+                <SubTitle text={"Non ancora registrato?"} />
+                <View style={styles.formRow}>
+                  <Label text={"Accedi come ospite"} />
+                  <View style={{ alignContent: "flex-end" }}>
+                    <Button text={"Accedi"} onPress={this.handleGuestLogin} />
+                  </View>
+                </View>
+                <View style={styles.formRow}>
+                  <Label text={"Registrati gratuitamente"} />
+                  <View style={{ alignContent: "flex-end" }}>
+                    <Button text={"Registrati"} onPress={this.handleSubmit} />
+                  </View>
+                </View>
+              </View>
+            </FlatCard>
+          </Card>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  small: {
+    paddingLeft: "15%",
+    paddingRight: "15%"
+  },
+  mammaRow: {
+    flexDirection: "column",
+    width: "100%"
+  },
   formRow: {
     justifyContent: "space-between",
     flexDirection: "row",

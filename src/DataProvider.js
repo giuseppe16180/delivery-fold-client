@@ -50,6 +50,26 @@ class DataProvider {
     });
   }
 
+  doGuestLogin = () => {
+    console.debug("DataProvider", "doGuestLogin");
+    return new Promise((resolve, reject) => {
+      this.doGet("not-signed-access")
+        .then(response => {
+          if (response != null) {
+            sessionStorage.setItem("token", response.value);
+            this.navigateCustomerHome();
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  };
+
   doLogin = (email, password) => {
     console.debug("DataProvider", "doLogin");
 
@@ -312,9 +332,6 @@ class DataProvider {
   navigateOrders() {
     window.location.href = "OrdersHistory";
   }
-
 }
-
-
 
 export default DataProvider;

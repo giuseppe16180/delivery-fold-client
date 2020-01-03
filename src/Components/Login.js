@@ -43,7 +43,18 @@ class Login extends React.Component {
       });
   };
 
-  handleGuestLogin = () => {};
+  handleGuestLogin = () => {
+    this.provider.doGuestLogin().catch(error => {
+      console.log(error);
+      if (error == "LoginIncorrect") {
+        alert(
+          "Errore interno, contatta lo sviluppatore se il problema persiste"
+        );
+      } else if (error == "FailedToFetch") {
+        alert("impossibile contattare il server, prova più tardi");
+      }
+    });
+  };
   handleSignin = () => {};
 
   render() {

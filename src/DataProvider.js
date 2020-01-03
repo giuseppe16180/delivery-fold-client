@@ -50,6 +50,31 @@ class DataProvider {
     });
   }
 
+  isGuest = () => {
+    return sessionStorage.getItem("user") == "guest";
+  };
+
+  doGuestLogin = () => {
+    console.debug("DataProvider", "doGuestLogin");
+    return new Promise((resolve, reject) => {
+      this.doGet("not-signed-access")
+        .then(response => {
+          if (response != null) {
+            sessionStorage.setItem("token", response.value);
+            sessionStorage.setItem("user", "guest");
+            this.navigateCustomerHome();
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  };
+
   doLogin = (email, password) => {
     console.debug("DataProvider", "doLogin");
 
@@ -64,6 +89,7 @@ class DataProvider {
           if (response.token != null) {
             sessionStorage.setItem("token", response.token);
             if (response.tipo === "cliente") {
+              sessionStorage.setItem("user", "customer");
               this.navigateCustomerHome();
             }
             // else {
@@ -373,7 +399,5 @@ class DataProvider {
 
 
 }
-
-
 
 export default DataProvider;

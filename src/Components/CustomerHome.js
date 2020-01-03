@@ -33,12 +33,19 @@ class CustomerHome extends React.Component {
       <View>
         <HeaderCard>
           <Title text={"DeliveryFood Home"} />
-
-          <View style={styles.userPanel}>
-            <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
-            <Button text={"i tuoi ordini 🍔"} onPress={this.provider.navigateOrders}/>
-            <Button text={"il tuo profilo 👤"} />
-          </View>
+          {this.provider.isGuest && (
+            <View style={styles.userPanel} sho>
+              <Button
+                text={"Carrello 🛒"}
+                onPress={this.provider.navigateCart}
+              />
+              <Button
+                text={"i tuoi ordini 🍔"}
+                onPress={this.provider.navigateOrders}
+              />
+              <Button text={"il tuo profilo 👤"} />
+            </View>
+          )}
         </HeaderCard>
 
         <Card>

@@ -10,23 +10,15 @@ import {
   FlatCard,
   SmallLabel
 } from "./delivery-fold-components";
-
-function OrderEntry(props) {
+//https://picsum.photos/id/400/400
+function MenuEntryOrder(props) {
   return (
     <FlatCard>
+      <Image style={styles.image} source={props.image} />
       <View style={styles.content}>
-      <div>
-        {props.nome ? (
-        <SubTitle text={"Ordine a domicilio"} />
-      ) : (
-        <SubTitle text={"Consumazione al locale"} />
-      )}
-      </div>
-        <Label text={props.data} />
-        <SmallLabel text={props.stato} />
-        <View style={styles.buttonRow}>
-          <Button text={"Dettagli"} onPress={props.onPressDetails} />
-        </View>
+        <SubTitle text={props.name} />
+        <Label text={props.price + "€"} />
+        <SmallLabel text={props.description} />
       </View>
     </FlatCard>
   );
@@ -49,4 +41,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default OrderEntry;
+export default MenuEntryOrder;

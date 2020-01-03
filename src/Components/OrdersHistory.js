@@ -38,8 +38,11 @@ class OrderHistory extends React.Component {
     });
   }
 
-  handleOrder = id => {
-    //this.provider.(id);
+  handleOrder (id, tipo) {
+    if(tipo)
+      this.provider.getOrder(id);
+    else
+    this.provider.getReservation(id);
   };
 
   render() {
@@ -62,10 +65,10 @@ class OrderHistory extends React.Component {
             data={this.state.ordini}
             renderItem={({ item }) => (
               <OrderSmall
-                nome={item.id}
+                nome={item.tipo}
                 data={item.data}
                 stato={item.stato}
-                onPressDetails={() => this.handleOrder(item.id)}
+                onPressDetails={() => this.handleOrder(item.id, item.tipo)}
               />
             )}
             keyExtractor={item => item.id}

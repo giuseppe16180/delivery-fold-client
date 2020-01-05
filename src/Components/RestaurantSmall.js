@@ -11,7 +11,7 @@ import {
   SmallLabel,
   VerySmallLabel
 } from "./delivery-fold-components";
-//https://picsum.photos/id/400/400
+//https://picsum.photos/400
 function RestaurantSmall(props) {
   return (
     <FlatCard>

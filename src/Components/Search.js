@@ -105,7 +105,7 @@ class Search extends React.Component {
                   description={
                     item.ristorante.indirizzo +
                     (item.mediaValutazioni == null
-                      ? ""
+                      ? " - Nessuna valutazione"
                       : " - " + item.mediaValutazioni + "★")
                   }
                   descriptionSmall={orari}

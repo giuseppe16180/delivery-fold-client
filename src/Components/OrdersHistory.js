@@ -70,13 +70,14 @@ class OrderHistory extends React.Component {
             data={this.state.ordini}
             renderItem={({ item }) => (
               <OrderSmall
-                nome={item.tipo}
-                data={item.data}
-                stato={item.stato}
-                onPressDetails={() => this.handleOrder(item.id, item.tipo)}
+                ristoranti={item.ristoranti}
+                tipo={item.ordine.tipo}
+                data={(new Date(item.ordine.data).toLocaleDateString())}
+                stato={item.ordine.stato}
+                onPressDetails={() => this.handleOrder(item.ordine.id, item.ordine.tipo)}
               />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.ordine.id}
           />
         </Card>
         <Separator times={4} />

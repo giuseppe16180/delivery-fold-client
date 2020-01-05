@@ -16,10 +16,10 @@ function OrderEntry(props) {
     <FlatCard>
       <View style={styles.content}>
       <div>
-        {props.nome ? (
-        <SubTitle text={"Ordine a domicilio"} />
+        {props.tipo ? (
+        <SubTitle text={"Ordine a domicilio: " + props.ristoranti} />
       ) : (
-        <SubTitle text={"Consumazione al locale"} />
+        <SubTitle text={"Consumazione al locale: " + props.ristoranti} />
       )}
       </div>
         <Label text={props.data} />

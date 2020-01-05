@@ -23,12 +23,14 @@ class Reservation extends React.Component {
     this.provider = new DataProvider();
     this.state = {
       id: "id",
+      ristoranti: "ristoranti",
       num_persone: "num_persone",
       orario: "orario",
       data: "data",
       stato: "stato",
       ristoranti: [],
       totale: "totale",
+      commento: "commento",
       piatti: []
     };
   }
@@ -39,12 +41,14 @@ class Reservation extends React.Component {
       console.log(response);
       this.setState({
         id: response.info.ordine.id,
+        ristoranti: response.ristoranti,
         num_persone: response.info.num_persone,
         orario: response.info.orario,
         data: response.info.ordine.data,
         stato: response.info.ordine.stato,
         ristoranti: response.ristoranti,
         totale: response.pagamento.totale,
+        commento: response.info.ordine.commento,
         piatti: response.piatti
       });
     });
@@ -79,19 +83,25 @@ class Reservation extends React.Component {
         <Card>
           <FlatCard>
             <View style={styles.restaurantInfoLeft}>
-              <Title text={"Prenotazione Tavolo, Ristoranteeeeee"} />
+              <Title text={"Prenotazione Tavolo, " + this.state.ristoranti} />
               <SubTitle
                 text={"Numero persone prenotazione: " + this.state.num_persone}
               />
               <SubTitle text={"Orario: " + this.state.orario} />
-              <SubTitle text={"Totale €" + this.state.totale} />
-              <Label text={this.state.data} />
-            </View>
-            <View style={styles.restaurantInfoRight}>
-              <VerySmallLabel text={this.state.orario} />
-              <View style={styles.rating} />
+              <SubTitle text={"Totale " + this.state.totale + "€"}/>
+              <Label text={new Date(this.state.data).toLocaleDateString()} />
             </View>
           </FlatCard>
+          <div>
+            {this.state.commento ? (
+              <FlatCard>
+              <View style={styles.content}>
+                <SubTitle text={"Commento:"} />
+                <Label text={this.state.commento} />
+              </View>
+            </FlatCard>
+            ): (null)}
+          </div>
           <Separator />
           <FlatList
             data={this.state.piatti}

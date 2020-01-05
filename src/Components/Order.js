@@ -23,6 +23,7 @@ class Order extends React.Component {
     this.provider = new DataProvider();
     this.state = {
       id: "id",
+      ristoranti: "ristoranti",
       telefono: "telefono_cliente",
       data: "data",
       stato: "stato",
@@ -30,6 +31,7 @@ class Order extends React.Component {
       indirizzo: "indirizzo",
       tempo_consegna: "tempo di consegna",
       totale: "totale",
+      commento: "commento",
       piatti: []
     };
   }
@@ -40,6 +42,7 @@ class Order extends React.Component {
       console.log(response);
       this.setState({
         id: response.info.ordine.id,
+        ristoranti: response.ristoranti,
         telefono: response.info.ordine.telefono,
         data: response.info.ordine.data,
         stato: response.info.ordine.stato,
@@ -47,6 +50,7 @@ class Order extends React.Component {
         indirizzo: response.info.indirizzo,
         tempo_consegna: response.info.ordine.tempo_consegna,
         totale: response.pagamento.totale,
+        commento: response.info.ordine.commento,
         piatti: response.piatti
       });
     });
@@ -83,14 +87,14 @@ class Order extends React.Component {
             <View style={styles.restaurantInfoLeft}>
               <Title
                 text={
-                  "Ordine a domicilio n." + this.state.id + " ,Ristorantiii"
+                  "Ordine a domicilio n." + this.state.id + ", " + this.state.ristoranti
                 }
               />
               <SubTitle text={"Tempo Consegna " + this.state.tempo_consegna} />
               <SubTitle
                 text={"Indirizzo di consegna: " + this.state.indirizzo}
               />
-              <SubTitle text={"Totale €" + this.state.totale} />
+              <SubTitle text={"Totale " + this.state.totale + "€"} />
               <Label text={this.state.stato} />
               <Label text={"Tel. " + this.state.telefono} />
             </View>
@@ -99,6 +103,16 @@ class Order extends React.Component {
               <View style={styles.rating} />
             </View>
           </FlatCard>
+          <div>
+            {this.state.commento ? (
+              <FlatCard>
+              <View style={styles.content}>
+                <SubTitle text={"Commento:"} />
+                <Label text={this.state.commento} />
+              </View>
+            </FlatCard>
+            ): (null)}
+          </div>
           <Separator />
           <FlatList
             data={this.state.piatti}

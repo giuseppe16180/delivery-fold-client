@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import {
   Card,
   Button,
@@ -13,6 +13,7 @@ import {
   FooterCard
 } from "./delivery-fold-components";
 import RestaurantSmall from "./RestaurantSmall";
+import MenuEntry from "./MenuEntry";
 import DataProvider from "./../DataProvider";
 
 class CustomerHome extends React.Component {
@@ -30,12 +31,22 @@ class CustomerHome extends React.Component {
     console.debug("CustomerHome", "componentDidMount");
     this.provider
       .doGetSpecialOffers()
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response);
+        this.setState({ specialOffers: response });
+      })
       .catch(err => {
         if (err == "FailedToFetch")
           alert("Impossibile contattare il server! Riprova più tardi");
       });
   }
+
+  handleAddToCart = id => {
+    this.provider
+      .doAddToCart(id)
+      .then(alert("Aggiunto al carrelllo!"))
+      .catch("Impossibile aggiungere al carrelllo");
+  };
 
   render() {
     console.debug("CustomerHome", "render");
@@ -84,20 +95,23 @@ class CustomerHome extends React.Component {
               />
             </View>
           </FlatCard>
-          <RestaurantSmall
-            image={"https://picsum.photos/id/450/450"}
-            name={"Pippo balli"}
-            description={"avfwegwrg"}
-          />
-          <RestaurantSmall
-            image={"https://picsum.photos/id/400/400"}
-            name={"Pippo balli"}
-            description={"wefwevgwrber"}
-          />
-          <RestaurantSmall
-            image={"https://picsum.photos/id/400/400"}
-            name={"Pippo balli"}
-            description={"wegwrg3h"}
+
+          <FlatList
+            data={this.state.specialOffers}
+            renderItem={({ item }) => (
+              <MenuEntry
+                image={"https://picsum.photos/id/400/400"}
+                name={item.info.nome}
+                price={item.ristorante.nome + "  -  " + item.info.prezzo}
+                description={
+                  item.info.descrizione +
+                  "\n\nValido fino al: " +
+                  new Date(item.scadenza).toLocaleDateString()
+                }
+                onAddToCart={() => this.handleAddToCart(item.info.id)} //TODO non so se funziona così
+              />
+            )}
+            keyExtractor={item => item.id}
           />
         </Card>
         <Separator times={4} />

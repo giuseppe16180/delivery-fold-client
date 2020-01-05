@@ -13,6 +13,9 @@ import { Button } from "./Components/delivery-fold-components";
 import OrdersHistory from "./Components/OrdersHistory";
 import Order from "./Components/Order";
 import Reservation from "./Components/Reservation";
+import RestaurantHome from "./Components/RestaurantHome";
+import RestOrder from "./Components/RestOrder";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -32,6 +35,9 @@ class App extends React.Component {
         <Route path="/CustomerHome">
           <CustomerHome />
         </Route>
+        <Route path="/RestaurantHome">
+          <RestaurantHome />
+        </Route>
         <Route path="/Search">
           <Search />
         </Route>
@@ -43,6 +49,9 @@ class App extends React.Component {
         </Route>
         <Route path="/Order">
           <Order />
+        </Route>
+        <Route path="/RestOrder">
+          <RestOrder />
         </Route>
         <Route path="/Reservation">
           <Reservation />

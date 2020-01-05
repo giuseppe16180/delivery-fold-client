@@ -201,10 +201,6 @@ class DataProvider {
     window.location.href = "CheckOut";
   }
 
-  navigateOrders() {
-    window.location.href = "Orders";
-  }
-
   navigateCustomerProfile() {
     window.location.href = "CustomerProfile";
   }
@@ -261,6 +257,8 @@ class DataProvider {
   }
 
   doCheckOut(data) {
+    data.token = this.token;
+
     if (data.ordine.tipo) {
       return new Promise((resolve, reject) => {
         this.doPost("cliente/ordini/domicilio/add", data)
@@ -292,6 +290,26 @@ class DataProvider {
           });
       });
     }
+  }
+
+  doAddInfoToNotSignedUser(data)
+  {
+    data.token = this.token;
+
+    return new Promise((resolve, reject) => {
+      this.doPost("cliente/not-signed-user/addInfo", data)
+        .then(response => {
+          if (response != null)
+            resolve(response);
+          else
+            reject("NoResults");
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+
+    })
   }
 
   doGetCartEntries() {

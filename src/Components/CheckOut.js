@@ -32,9 +32,11 @@ class CheckOut extends React.Component {
       numPersone: 0,
       orario: null,
       recapitoNome: null,
-      reacpitoCognome: null,
-      reacpitoEmail: null,
-      recapitoTelefono: null
+      recapitoCognome: null,
+      recapitoEmail: null,
+      recapitoTelefono: null,
+      citofono: null,
+      commento: ""
     };
   }
 
@@ -50,9 +52,10 @@ class CheckOut extends React.Component {
 
   handleCheckOut = () => {
     const data = {
+      token: null,
       ordine: {
         data: new Date(),
-        commento: "",
+        commento: this.state.commento,
         tipo: this.state.isDeliveryOrder
       },
       domicilio: {
@@ -77,10 +80,34 @@ class CheckOut extends React.Component {
       };
     }
 
-    this.provider
+    if (this.provider.isGuest())
+    {
+      const addInfo = {
+        token: null,
+        cliente: {
+          email: this.state.recapitoEmail,
+          nome: this.state.recapitoNome,
+          cognome: this.state.recapitoCognome,
+          telefono: this.state.recapitoTelefono
+        }
+      };
+
+      this.provider
+        .doAddInfoToNotSignedUser(addInfo)
+        .then(this.provider.doCheckOut(data)
+              .then(result => alert("Ordine completato!", result.value))
+              .catch("Riprova più tardi"))
+        .catch("Riprova più tardi");
+    }
+    else
+    {
+      this.provider
       .doCheckOut(data)
       .then(result => alert("Ordine completato!", result.value))
       .catch("Riprova più tardi");
+    }
+
+    
   };
 
   render() {
@@ -202,10 +229,16 @@ class CheckOut extends React.Component {
               >
                 <View style={styles.formRow}>
                   <Label text={"Inserisci l'indirizzo di consegna:"} />
-                  <View style={{ width: "40%" }}>
+                  <View style={{ width: "35%" }}>
                     <Input
                       placeholder={"indirizzo"}
                       onChange={text => this.setState({ indirizzo: text })}
+                    />
+                  </View>
+                  <View style={{ width: "30%" }}>
+                    <Input
+                      placeholder={"citofono"}
+                      onChange={text => this.setState({ citofono: text })}
                     />
                   </View>
                 </View>
@@ -218,7 +251,6 @@ class CheckOut extends React.Component {
                 }}
                 pointerEvents={this.state.isDeliveryOrder ? "none" : "auto"}
               >
-                {!this.provider.isGuest() && (
                   <View style={styles.formRow}>
                     <Label text={"Inserisci i dettagli della prenotazione:"} />
 
@@ -230,7 +262,7 @@ class CheckOut extends React.Component {
                     >
                       <View style={{ width: "35%" }}>
                         <Input
-                          placeholder={"numero presone"}
+                          placeholder={"numero persone"}
                           onChange={text => this.setState({ numPersone: text })}
                         />
                       </View>
@@ -242,32 +274,50 @@ class CheckOut extends React.Component {
                       </View>
                     </View>
                   </View>
-                )}
               </View>
-              {this.provider.isGuest() && (
-                <View style={styles.formRow}>
-                  <Label text={"Inserisci recapiti:"} />
-                  <View style={{ width: "20%" }}>
+
+              <View style={styles.formRow}>
+                <Label text={"Inserisci eventuali commenti e/o allergie:"}/>
+                <View style={{width : "60%"}}>
+                  <Input
+                    placeholder={"commento"}
+                    onChange={text => this.setState({commento: text})}
+                  />
+                </View>
+              </View>
+            </View>
+          </FlatCard>
+
+          {this.provider.isGuest() && (
+          <FlatCard>
+            <View style={styles.forms}>
+              <SubTitle text={"Informazioni aggiuntive"}/>
+              <View style={styles.formRow}>
+                  <Label text={"Inserisci il nominativo:"} />
+                  <View style={{ width: "34.5%" }}>
                     <Input
                       placeholder={"nome"}
                       onChange={text => this.setState({ recapitoNome: text })}
                     />
                   </View>
-                  <View style={{ width: "20%" }}>
+                  <View style={{ width: "34.5%" }}>
                     <Input
                       placeholder={"cognome"}
                       onChange={text =>
-                        this.setState({ reacpitoCognome: text })
+                        this.setState({ recapitoCognome: text })
                       }
                     />
                   </View>
-                  <View style={{ width: "20%" }}>
-                    <Input
+                </View>
+                <View style={styles.formRow}>
+                  <Label text={"Inserisci i contatti:"}/>
+                  <View style={{ width: "40%" }}>
+                    <Input 
                       placeholder={"email"}
-                      onChange={text => this.setState({ reacpitoEmail: text })}
+                      onChange={text => this.setState({ recapitoEmail: text })}
                     />
                   </View>
-                  <View style={{ width: "20%" }}>
+                  <View style={{ width: "25%" }}>
                     <Input
                       placeholder={"telefono"}
                       onChange={text =>
@@ -276,10 +326,9 @@ class CheckOut extends React.Component {
                     />
                   </View>
                 </View>
-              )}
             </View>
           </FlatCard>
-
+          )}
           <FlatCard>
             <View style={styles.searchRow}>
               <View style={styles.suggestionsRow}>

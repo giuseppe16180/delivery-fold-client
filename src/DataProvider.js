@@ -54,6 +54,27 @@ class DataProvider {
     return sessionStorage.getItem("user") == "guest";
   };
 
+  doGetSpecialOffers = () => {
+    console.debug("DataProvider", "doGetSpecialOffers");
+    var data = {
+      value: this.token
+    };
+    return new Promise((resolve, reject) => {
+      this.doPost("cliente/offerta-speciale/all", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  };
+
   doGuestLogin = () => {
     console.debug("DataProvider", "doGuestLogin");
     return new Promise((resolve, reject) => {

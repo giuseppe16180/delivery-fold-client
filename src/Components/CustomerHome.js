@@ -21,10 +21,20 @@ class CustomerHome extends React.Component {
     console.debug("CustomerHome", "constructor");
     this.provider = new DataProvider();
     console.log("customer token", this.provider.token);
+    this.state = {
+      specialOffers: []
+    };
   }
 
   componentDidMount() {
     console.debug("CustomerHome", "componentDidMount");
+    this.provider
+      .doGetSpecialOffers()
+      .then(response => console.log(response))
+      .catch(err => {
+        if (err == "FailedToFetch")
+          alert("Impossibile contattare il server! Riprova più tardi");
+      });
   }
 
   render() {
@@ -75,7 +85,7 @@ class CustomerHome extends React.Component {
             </View>
           </FlatCard>
           <RestaurantSmall
-            image={"https://picsum.photos/id/400/400"}
+            image={"https://picsum.photos/id/450/450"}
             name={"Pippo balli"}
             description={"avfwegwrg"}
           />

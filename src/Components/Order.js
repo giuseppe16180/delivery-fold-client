@@ -22,15 +22,15 @@ class Order extends React.Component {
     console.debug("Order", "constructor");
     this.provider = new DataProvider();
     this.state = {
-        id: "id",
-        telefono: "telefono_cliente",
-        data: "data",
-        stato: "stato",
-        tipo: "tipo",
-        indirizzo: "indirizzo",
-        tempo_consegna: "tempo di consegna",
-        totale: "totale",
-        piatti: []
+      id: "id",
+      telefono: "telefono_cliente",
+      data: "data",
+      stato: "stato",
+      tipo: "tipo",
+      indirizzo: "indirizzo",
+      tempo_consegna: "tempo di consegna",
+      totale: "totale",
+      piatti: []
     };
   }
 
@@ -52,7 +52,6 @@ class Order extends React.Component {
     });
   }
 
-
   render() {
     console.debug("Order", "render");
     return (
@@ -65,16 +64,32 @@ class Order extends React.Component {
               onPress={this.provider.navigateCustomerHome}
             />
             <Button text={"Carrello 🛒"} onPress={this.provider.navigateCart} />
-            <Button text={"i tuoi ordini 🍔"} onPress={this.provider.navigateOrders}/>
-            <Button text={"il tuo profilo 👤"} />
+            {!this.provider.isGuest() && (
+              <Button
+                text={"i tuoi ordini 🍔"}
+                onPress={this.provider.navigateOrders}
+              />
+            )}
+            {!this.provider.isGuest() && (
+              <Button
+                text={"il tuo profilo 👤"}
+                onPress={this.provider.navigateCustomerProfile}
+              />
+            )}
           </View>
         </HeaderCard>
         <Card>
           <FlatCard>
             <View style={styles.restaurantInfoLeft}>
-              <Title text={"Ordine a domicilio n." + this.state.id + " ,Ristorantiii"} />
-              <SubTitle text={"Tempo Consegna " +this.state.tempo_consegna} />
-              <SubTitle text={"Indirizzo di consegna: " +this.state.indirizzo} />
+              <Title
+                text={
+                  "Ordine a domicilio n." + this.state.id + " ,Ristorantiii"
+                }
+              />
+              <SubTitle text={"Tempo Consegna " + this.state.tempo_consegna} />
+              <SubTitle
+                text={"Indirizzo di consegna: " + this.state.indirizzo}
+              />
               <SubTitle text={"Totale €" + this.state.totale} />
               <Label text={this.state.stato} />
               <Label text={"Tel. " + this.state.telefono} />

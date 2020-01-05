@@ -100,7 +100,7 @@ class Search extends React.Component {
               orari[6] = "Dom " + orari[6] + " ";
               return (
                 <RestaurantSmall
-                  image={"https://picsum.photos/id/400/400"}
+                  image={item.ristorante.fotoLocale}
                   name={item.ristorante.nome}
                   description={
                     item.ristorante.indirizzo +

@@ -100,7 +100,7 @@ class CustomerHome extends React.Component {
             data={this.state.specialOffers}
             renderItem={({ item }) => (
               <MenuEntry
-                image={"https://picsum.photos/id/400/400"}
+                image={item.info.immagine}
                 name={item.info.nome}
                 price={item.ristorante.nome + "  -  " + item.info.prezzo}
                 description={

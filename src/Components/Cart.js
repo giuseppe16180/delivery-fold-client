@@ -82,12 +82,16 @@ class Cart extends React.Component {
             <View style={styles.searchRow}>
               <View style={styles.suggestionsRow}>
                 <SubTitle text={"Procedi all'ordine!"} />
-                <Label text={"Totale " + this.state.total + "€"} />
+                <Label text={"Totale " + (this.state.total != null ? this.state.total : 0) + "€"} />
               </View>
-              <Button
-                text={"check out"}
-                onPress={this.provider.navigateCheckOut}
-              />
+              <View style={{opacity: (this.state.total != null)? 1 : 0.4}}
+                    pointerEvents={(this.state.total != null)? "auto" : "none"}
+              >
+                <Button
+                  text={"check out"}
+                  onPress={this.provider.navigateCheckOut}
+                />
+              </View>
             </View>
           </FlatCard>
           <Separator />

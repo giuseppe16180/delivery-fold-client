@@ -46,7 +46,7 @@ class RestaurantHome extends React.Component {
     return (
       <View>
         <HeaderCard>
-          <Title text={"DeliveryFood Ordini"} />
+          <Title text={"DeliveryFood Home"} />
           <View style={styles.userPanel}>
             {!this.provider.isGuest() && (
               <Button

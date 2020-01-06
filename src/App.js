@@ -15,6 +15,7 @@ import Order from "./Components/Order";
 import Reservation from "./Components/Reservation";
 import RestaurantHome from "./Components/RestaurantHome";
 import RestOrder from "./Components/RestOrder";
+import RestReservation from "./Components/RestReservation";
 
 
 class App extends React.Component {
@@ -52,6 +53,9 @@ class App extends React.Component {
         </Route>
         <Route path="/RestOrder">
           <RestOrder />
+        </Route>
+        <Route path="/RestReservation">
+          <RestReservation />
         </Route>
         <Route path="/Reservation">
           <Reservation />

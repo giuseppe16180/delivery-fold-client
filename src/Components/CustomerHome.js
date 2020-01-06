@@ -65,6 +65,10 @@ class CustomerHome extends React.Component {
                 onPress={this.provider.navigateOrders}
               />
               <Button text={"il tuo profilo 👤"} />
+              <Button 
+                text={"Logout"}
+                onPress={this.provider.doLogout}
+              />
             </View>
           )}
         </HeaderCard>

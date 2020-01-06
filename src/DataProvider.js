@@ -127,6 +127,35 @@ class DataProvider {
     });
   };
 
+  doLogout = () =>
+  {
+    console.debug("DataProvider", "doLogout");
+    const data = {
+      value: this.token
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("/logout", data)
+        .then(response => {
+          if (response != null)
+          {
+            sessionStorage.clear();
+            this.navigateLogin();
+          }
+          else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          if (error === "NoResults")
+            reject("Riprova più tardi.");
+          else
+            reject("FailedToFetch");
+        });
+    });
+  };
+
   doSearch(query) {
     console.debug("DataProvider", "doSearch");
 
@@ -203,6 +232,10 @@ class DataProvider {
 
   navigateCustomerProfile() {
     window.location.href = "CustomerProfile";
+  }
+
+  navigateLogin() {
+    window.location.href = "Login";
   }
 
   doAddToCart(menuEntryId) {

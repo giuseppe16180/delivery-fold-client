@@ -71,6 +71,12 @@ class Search extends React.Component {
                 onPress={this.provider.navigateCustomerProfile}
               />
             )}
+            {!this.provider.isGuest() && (
+              <Button 
+                text={"Logout"}
+                onPress={this.provider.doLogout}
+            />
+            )}
           </View>
         </HeaderCard>
 

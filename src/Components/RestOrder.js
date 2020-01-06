@@ -19,7 +19,7 @@ import MenuEntryOrder from "./MenuEntryOrder";
 class RestOrder extends React.Component {
   constructor(props) {
     super(props);
-    console.debug("Order", "constructor");
+    console.debug("RestOrder", "constructor");
     this.provider = new DataProvider();
     this.state = {
       id: "id",
@@ -37,7 +37,7 @@ class RestOrder extends React.Component {
   }
 
   componentDidMount() {
-    console.debug("Order", "componentDidMount");
+    console.debug("RestOrder", "componentDidMount");
     this.provider.getRestBookedOrder().then(response => {
       console.log(response);
       this.setState({
@@ -56,6 +56,18 @@ class RestOrder extends React.Component {
         piatti: response.piatti
       });
     });
+  }
+
+  handleOrder(stato, id) {
+    sessionStorage.setItem("id", id);
+    if (stato == "in elaborazione")
+      this.provider.doAcceptOrder();
+    else if(stato == "accettato dal ristorante")
+      this.provider.doShipOrder();
+    else if(stato == "in consegna")
+      this.provider.doCompleteOrder();
+    else
+      this.provider.doCancelOrder();
   }
 
   render() {
@@ -97,19 +109,39 @@ class RestOrder extends React.Component {
 
 
 
+
+            {(this.state.stato == "in elaborazione") ? (
+              <View style={styles.buttonRow}>
+                <Button text={"Accetta ordine"}  
+                onPress={() => this.handleOrder(this.state.stato, this.state.id)}/>
+              </View>
+            ): ((this.state.stato == "accettato dal ristorante") ? (
+              <View style={styles.buttonRow}>
+                <Button text={"In consegna"}  
+                onPress={() => this.handleOrder(this.state.stato, this.state.id)}
+                />
+              </View>
+            ): ((this.state.stato == "in consegna") ? (
+              <View style={styles.buttonRow}>
+                <Button text={"Completato"}  
+                onPress={() => this.handleOrder(this.state.stato, this.state.id)}
+                
+                />
+              </View>
+            ): (null)
+            ))}
+
+            {((this.state.stato != "completato") && (this.state.stato != "cancellato")) ? (
+              <View style={styles.buttonRow}>
+                <Button text={"Cancella"}  
+                onPress={() => this.handleOrder("cancellato", this.state.id)}
+                />
+              </View>
+            ): (null)
+            }
+
             
-            <View style={styles.buttonRow}>
-              <Button text={"In elaborazione"}  />
-            </View>
-            <View style={styles.buttonRow}>
-              <Button text={"In consegna"}  />
-            </View>
-            <View style={styles.buttonRow}>
-              <Button text={"Completato"}  />
-            </View>
-            <View style={styles.buttonRow}>
-              <Button text={"Cancella"}  />
-            </View>
+            
 
             
 

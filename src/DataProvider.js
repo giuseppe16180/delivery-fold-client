@@ -430,6 +430,110 @@ class DataProvider {
     });
   }
 
+  doAcceptOrder() {
+    const data = {
+      token: this.token,
+      ordine: {
+        id: sessionStorage.getItem("id")
+      },
+      orario: ""
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("ristorante/ordini/accept", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+            window.location.href = "RestOrder";
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });      
+    });
+  }
+
+  doCancelOrder() {
+    const data = {
+      token: this.token,
+      ordine: {
+        id: sessionStorage.getItem("id")
+      }
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("ristorante/ordini/delete", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+            //window.location.href = "RestOrder";
+            console.log(response.value);
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });      
+    });
+  }
+
+  doShipOrder() {
+    const data = {
+      token: this.token,
+      ordine: {
+        id: sessionStorage.getItem("id")
+      },
+      orario: "2020-01-07T14:00:00"
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("ristorante/ordini/delivery", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+            window.location.href = "RestOrder";
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });      
+    });
+  }
+
+  doCompleteOrder() {
+    const data = {
+      token: this.token,
+      ordine: {
+        id: sessionStorage.getItem("id")
+      },
+      orario: "2020-01-07T14:00:00"
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("ristorante/ordini/complete", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+            window.location.href = "RestOrder";
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });      
+    });
+  }
+
   getAllOrders() {
     const data = {
       value: this.token

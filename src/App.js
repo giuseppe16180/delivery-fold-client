@@ -14,7 +14,7 @@ import OrdersHistory from "./Components/OrdersHistory";
 import Order from "./Components/Order";
 import Reservation from "./Components/Reservation";
 import RestaurantHome from "./Components/RestaurantHome";
-// import RestOrder from "./Components/RestOrder";
+import RestOrder from "./Components/RestOrder";
 
 
 class App extends React.Component {
@@ -50,9 +50,9 @@ class App extends React.Component {
         <Route path="/Order">
           <Order />
         </Route>
-        {/* <Route path="/RestOrder">
+        <Route path="/RestOrder">
           <RestOrder />
-        </Route> */}
+        </Route>
         <Route path="/Reservation">
           <Reservation />
         </Route>

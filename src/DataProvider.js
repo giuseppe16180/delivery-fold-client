@@ -113,9 +113,10 @@ class DataProvider {
               sessionStorage.setItem("user", "customer");
               this.navigateCustomerHome();
             }
-            // else {
-            //   reindirizza alla home ristorante
-            // }
+            else {
+              sessionStorage.setItem("user", "restaurant"); //a che serve? ahah
+              this.navigateRestaurantHome();
+             }
           } else {
             reject("LoginIncorrect");
           }
@@ -182,6 +183,10 @@ class DataProvider {
 
   navigateCustomerHome() {
     window.location.href = "CustomerHome";
+  }
+
+  navigateRestaurantHome() {
+    window.location.href = "RestaurantHome";
   }
 
   navigateSearch() {
@@ -339,6 +344,55 @@ class DataProvider {
     };
     return new Promise((resolve, reject) => {
       this.doPost("ristorante/menu", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }
+
+  getAllRestOrders() {
+    const data = {
+      value: this.token
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doPost("/ristorante/ordini/all", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResults");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }
+
+  getRestOrder(order) {
+    sessionStorage.setItem("id", order);
+    window.location.href = "RestOrder";
+  }
+
+  getRestBookedOrder() {
+    const data = {
+      token: this.token,
+      ordine: {
+        id: sessionStorage.getItem("id")
+      }
+    };
+    return new Promise((resolve, reject) => {
+      this.doPost("ristorante/ordini/domicilio/details", data)
         .then(response => {
           if (response != null) {
             resolve(response);

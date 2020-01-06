@@ -407,6 +407,34 @@ class DataProvider {
     window.location.href = "RestOrder";
   }
 
+  getRestReservation(order) {
+    sessionStorage.setItem("id", order);
+    window.location.href = "RestReservation";
+  }
+
+  getRestReservationOrder() {
+    const data = {
+      token: this.token,
+      ordine: {
+        id: sessionStorage.getItem("id")
+      }
+    };
+    return new Promise((resolve, reject) => {
+      this.doPost("ristorante/ordini/prenotazione/details", data)
+        .then(response => {
+          if (response != null) {
+            resolve(response);
+          } else {
+            reject("NoResult");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          reject("FailedToFetch");
+        });
+    });
+  }
+
   getRestBookedOrder() {
     const data = {
       token: this.token,
@@ -444,7 +472,10 @@ class DataProvider {
         .then(response => {
           if (response != null) {
             resolve(response);
-            window.location.href = "RestOrder";
+            if(sessionStorage.getItem("tipo"))
+              window.location.href = "RestOrder";
+            else
+              window.location.href = "RestReservation";
           } else {
             reject("NoResult");
           }
@@ -469,8 +500,10 @@ class DataProvider {
         .then(response => {
           if (response != null) {
             resolve(response);
-            //window.location.href = "RestOrder";
-            console.log(response.value);
+            if(sessionStorage.getItem("tipo"))
+              window.location.href = "RestOrder";
+            else
+              window.location.href = "RestReservation";
           } else {
             reject("NoResult");
           }
@@ -522,7 +555,10 @@ class DataProvider {
         .then(response => {
           if (response != null) {
             resolve(response);
-            window.location.href = "RestOrder";
+            if(sessionStorage.getItem("tipo"))
+              window.location.href = "RestOrder";
+            else
+              window.location.href = "RestReservation";
           } else {
             reject("NoResult");
           }

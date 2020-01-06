@@ -23,7 +23,7 @@ class Search extends React.Component {
     console.log("customer token", this.provider.token);
     this.state = { query: null, results: null };
     this.provider
-      .getAllRestaurants()
+      .doGetAllRestaurants()
       .then(response => this.setState({ results: response }));
     this.handleSearch = this.handleSearch.bind(this); // Era questo il problema   https://stackoverflow.com/questions/39176248/react-js-cant-read-property-of-undefined
   }
@@ -70,6 +70,9 @@ class Search extends React.Component {
                 text={"il tuo profilo 👤"}
                 onPress={this.provider.navigateCustomerProfile}
               />
+            )}
+            {!this.provider.isGuest() && (
+              <Button text={"Logout"} onPress={this.provider.doLogout} />
             )}
           </View>
         </HeaderCard>

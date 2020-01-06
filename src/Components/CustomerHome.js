@@ -23,29 +23,39 @@ class CustomerHome extends React.Component {
     this.provider = new DataProvider();
     console.log("customer token", this.provider.token);
     this.state = {
-      specialOffers: []
+      specialOffers: [],
+      isReady: false
     };
   }
 
   componentDidMount() {
     console.debug("CustomerHome", "componentDidMount");
-    this.provider
-      .doGetSpecialOffers()
-      .then(response => {
-        console.log(response);
-        this.setState({ specialOffers: response });
-      })
-      .catch(err => {
-        if (err == "FailedToFetch")
-          alert("Impossibile contattare il server! Riprova più tardi");
-      });
+    if (!this.provider.isGuest()) {
+      this.provider
+        .doGetSpecialOffers()
+        .then(response => {
+          console.log(response);
+          this.setState({ specialOffers: response, isReady: true });
+        })
+        .catch(err => {
+          if (err === "NoResults") {
+            alert("");
+          } else if (err === "FailedToFetch") {
+            alert("Impossibile contattare il server! Riprova più tardi");
+          }
+        });
+    }
   }
 
   handleAddToCart = id => {
     this.provider
       .doAddToCart(id)
-      .then(alert("Aggiunto al carrelllo!"))
-      .catch("Impossibile aggiungere al carrelllo");
+      .then(alert("Aggiunto al carrello!"))
+      .catch(error => {
+        if (error == "FailedToFetch") {
+          alert("Impossibile contattere il server");
+        }
+      });
   };
 
   render() {
@@ -65,6 +75,7 @@ class CustomerHome extends React.Component {
                 onPress={this.provider.navigateOrders}
               />
               <Button text={"il tuo profilo 👤"} />
+              <Button text={"Logout"} onPress={this.provider.doLogout} />
             </View>
           )}
         </HeaderCard>
@@ -85,34 +96,38 @@ class CustomerHome extends React.Component {
             </View>
           </FlatCard>
           <Separator />
-          <FlatCard>
-            <View style={styles.suggestionsRow}>
-              <SubTitle text={"Ecco i nostri suggerimenti"} />
-              <Label
-                text={
-                  "Perché non dai uno sguardo alle offerte speciali a te riservate?"
-                }
-              />
-            </View>
-          </FlatCard>
+          {this.state.isReady && (
+            <FlatCard>
+              <View style={styles.suggestionsRow}>
+                <SubTitle text={"Ecco i nostri suggerimenti"} />
+                <Label
+                  text={
+                    "Perché non dai uno sguardo alle offerte speciali a te riservate?"
+                  }
+                />
+              </View>
+            </FlatCard>
+          )}
 
-          <FlatList
-            data={this.state.specialOffers}
-            renderItem={({ item }) => (
-              <MenuEntry
-                image={item.info.immagine}
-                name={item.info.nome}
-                price={item.ristorante.nome + "  -  " + item.info.prezzo}
-                description={
-                  item.info.descrizione +
-                  "\n\nValido fino al: " +
-                  new Date(item.scadenza).toLocaleDateString()
-                }
-                onAddToCart={() => this.handleAddToCart(item.info.id)} //TODO non so se funziona così
-              />
-            )}
-            keyExtractor={item => item.id}
-          />
+          {this.state.isReady && (
+            <FlatList
+              data={this.state.specialOffers}
+              renderItem={({ item }) => (
+                <MenuEntry
+                  image={item.info.immagine}
+                  name={item.info.nome}
+                  price={item.ristorante.nome + "  -  " + item.info.prezzo}
+                  description={
+                    item.info.descrizione +
+                    "\n\nValido fino al: " +
+                    new Date(item.scadenza).toLocaleDateString()
+                  }
+                  onAddToCart={() => this.handleAddToCart(item.info.id)} //TODO non so se funziona così
+                />
+              )}
+              keyExtractor={item => item.id}
+            />
+          )}
         </Card>
         <Separator times={4} />
       </View>

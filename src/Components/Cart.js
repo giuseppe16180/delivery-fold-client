@@ -41,14 +41,26 @@ class Cart extends React.Component {
     this.provider
       .doRemoveCartEntry(id, 1)
       .then(alert("Rimosso"))
-      .catch("Riprova più tardi");
+      .catch(error => {
+        if (error == "NoResults") {
+          alert("Impossibile rimuovere");
+        } else if (error == "FailedToFetch") {
+          alert("Impossibile contattere il server");
+        }
+      });
   };
 
   handleRemoveQuantity = (id, quantity) => {
     this.provider
       .doRemoveCartEntry(id, quantity)
       .then(alert("Rimosso tutto"))
-      .catch("Riprova più tardi");
+      .catch(error => {
+        if (error == "NoResults") {
+          alert("Impossibile rimuovere");
+        } else if (error == "FailedToFetch") {
+          alert("Impossibile contattere il server");
+        }
+      });
   };
 
   render() {
@@ -74,6 +86,9 @@ class Cart extends React.Component {
                 onPress={this.provider.navigateCustomerProfile}
               />
             )}
+            {!this.provider.isGuest() && (
+              <Button text={"Logout"} onPress={this.provider.doLogout} />
+            )}
           </View>
         </HeaderCard>
 
@@ -82,10 +97,17 @@ class Cart extends React.Component {
             <View style={styles.searchRow}>
               <View style={styles.suggestionsRow}>
                 <SubTitle text={"Procedi all'ordine!"} />
-                <Label text={"Totale " + (this.state.total != null ? this.state.total : 0) + "€"} />
+                <Label
+                  text={
+                    "Totale " +
+                    (this.state.total != null ? this.state.total : 0) +
+                    "€"
+                  }
+                />
               </View>
-              <View style={{opacity: (this.state.total != null)? 1 : 0.4}}
-                    pointerEvents={(this.state.total != null)? "auto" : "none"}
+              <View
+                style={{ opacity: this.state.total != null ? 1 : 0.4 }}
+                pointerEvents={this.state.total != null ? "auto" : "none"}
               >
                 <Button
                   text={"check out"}

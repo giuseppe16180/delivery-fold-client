@@ -127,8 +127,7 @@ class DataProvider {
     });
   };
 
-  doLogout = () =>
-  {
+  doLogout = () => {
     console.debug("DataProvider", "doLogout");
     const data = {
       value: this.token
@@ -137,21 +136,17 @@ class DataProvider {
     return new Promise((resolve, reject) => {
       this.doPost("/logout", data)
         .then(response => {
-          if (response != null)
-          {
+          if (response != null) {
             sessionStorage.clear();
             this.navigateLogin();
-          }
-          else {
+          } else {
             reject("NoResults");
           }
         })
         .catch(error => {
           console.error(error);
-          if (error === "NoResults")
-            reject("Riprova più tardi.");
-          else
-            reject("FailedToFetch");
+          if (error === "NoResults") reject("Riprova più tardi.");
+          else reject("FailedToFetch");
         });
     });
   };
@@ -189,8 +184,7 @@ class DataProvider {
     });
   }
 
-  getAllRestaurants() {
-    //todo mettere il do
+  doGetAllRestaurants() {
     console.debug("DataProvider", "getAllRestaurants");
 
     return new Promise((resolve, reject) => {
@@ -239,7 +233,7 @@ class DataProvider {
   }
 
   doAddToCart(menuEntryId) {
-    console.debug("doAddToCart", menuEntryId);
+    console.debug("DataProvider", "doAddToCart");
     const data = {
       token: this.token,
       piatto: {
@@ -325,24 +319,20 @@ class DataProvider {
     }
   }
 
-  doAddInfoToNotSignedUser(data)
-  {
+  doAddInfoToNotSignedUser(data) {
     data.token = this.token;
 
     return new Promise((resolve, reject) => {
       this.doPost("cliente/not-signed-user/addInfo", data)
         .then(response => {
-          if (response != null)
-            resolve(response);
-          else
-            reject("NoResults");
+          if (response != null) resolve(response);
+          else reject("NoResults");
         })
         .catch(error => {
           console.error(error);
           reject("FailedToFetch");
         });
-
-    })
+    });
   }
 
   doGetCartEntries() {

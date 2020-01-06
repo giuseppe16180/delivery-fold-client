@@ -23,7 +23,6 @@ class RestOrder extends React.Component {
     this.provider = new DataProvider();
     this.state = {
       id: "id",
-      ristoranti: "ristoranti",
       telefono: "telefono_cliente",
       data: "data",
       stato: "stato",
@@ -42,7 +41,6 @@ class RestOrder extends React.Component {
       console.log(response);
       this.setState({
         id: response.info.ordine.id,
-        ristoranti: response.ristoranti,
         nome: response.info.ordine.cliente.nome,
         cognome: response.info.ordine.cliente.cognome,
         telefono: response.info.ordine.telefono,
@@ -58,8 +56,10 @@ class RestOrder extends React.Component {
     });
   }
 
-  handleOrder(stato, id) {
+  handleOrder(stato, id, tipo) {
     sessionStorage.setItem("id", id);
+    sessionStorage.setItem("tipo", tipo)
+
     if (stato == "in elaborazione")
       this.provider.doAcceptOrder();
     else if(stato == "accettato dal ristorante")
@@ -104,48 +104,36 @@ class RestOrder extends React.Component {
               <SubTitle text={"Totale " + this.state.totale + "€"} />
               <Label text={this.state.stato} />
               <Label text={"Tel. " + this.state.telefono} />
+              <Label text={new Date(this.state.data).toLocaleDateString()} />
             </View>
-
-
-
-
-
             {(this.state.stato == "in elaborazione") ? (
               <View style={styles.buttonRow}>
                 <Button text={"Accetta ordine"}  
-                onPress={() => this.handleOrder(this.state.stato, this.state.id)}/>
+                onPress={() => this.handleOrder(this.state.stato, this.state.id, this.state.tipo)}/>
               </View>
             ): ((this.state.stato == "accettato dal ristorante") ? (
               <View style={styles.buttonRow}>
                 <Button text={"In consegna"}  
-                onPress={() => this.handleOrder(this.state.stato, this.state.id)}
+                onPress={() => this.handleOrder(this.state.stato, this.state.id, this.state.tipo)}
                 />
               </View>
             ): ((this.state.stato == "in consegna") ? (
               <View style={styles.buttonRow}>
                 <Button text={"Completato"}  
-                onPress={() => this.handleOrder(this.state.stato, this.state.id)}
+                onPress={() => this.handleOrder(this.state.stato, this.state.id, this.state.tipo)}
                 
                 />
               </View>
             ): (null)
             ))}
-
             {((this.state.stato != "completato") && (this.state.stato != "cancellato")) ? (
               <View style={styles.buttonRow}>
                 <Button text={"Cancella"}  
-                onPress={() => this.handleOrder("cancellato", this.state.id)}
+                onPress={() => this.handleOrder("cancellato", this.state.id, this.state.tipo)}
                 />
               </View>
             ): (null)
             }
-
-            
-            
-
-            
-
-
           </FlatCard>
           <div>
             {this.state.commento ? (

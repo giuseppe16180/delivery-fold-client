@@ -144,7 +144,7 @@ class RestReservation extends React.Component {
             data={this.state.piatti}
             renderItem={({ item }) => (
               <MenuEntryOrder
-                image={"https://picsum.photos/id/400/400"}
+                image={item.immagine}
                 name={item.nome}
                 price={item.prezzo}
                 description={item.descrizione}

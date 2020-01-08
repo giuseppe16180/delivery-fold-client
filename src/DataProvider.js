@@ -521,7 +521,7 @@ class DataProvider {
       ordine: {
         id: sessionStorage.getItem("id")
       },
-      orario: "2020-01-07T14:00:00"
+      orario: "2020-01-11T14:00:00"
     };
 
     return new Promise((resolve, reject) => {
@@ -547,7 +547,7 @@ class DataProvider {
       ordine: {
         id: sessionStorage.getItem("id")
       },
-      orario: "2020-01-07T14:00:00"
+      orario: "2020-01-11T14:00:00"
     };
 
     return new Promise((resolve, reject) => {

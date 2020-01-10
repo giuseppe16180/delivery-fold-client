@@ -38,7 +38,6 @@ class RestaurantMenu extends React.Component {
     console.debug("RestaurantMenu", "componentDidMount");
     this.provider.doGetRestaurant().then(response => {
       console.log(response);
-      //scarparizia intensifies, perdoname o madre por mi api loca
       const orari = response.ristorante.orario.split("/");
       orari[0] = "Lun " + orari[0] + " ";
       orari[1] = "Mar " + orari[1] + "\n";
@@ -141,7 +140,7 @@ class RestaurantMenu extends React.Component {
                 name={item.nome}
                 price={item.prezzo}
                 description={item.descrizione}
-                onAddToCart={() => this.handleAddToCart(item.id)} //TODO non so se funziona così
+                onAddToCart={() => this.handleAddToCart(item.id)}
               />
             )}
             keyExtractor={item => item.id}

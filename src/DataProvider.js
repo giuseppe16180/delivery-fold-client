@@ -114,7 +114,7 @@ class DataProvider {
               this.navigateCustomerHome();
             }
             else {
-              sessionStorage.setItem("user", "restaurant"); //a che serve? ahah
+              sessionStorage.setItem("user", "restaurant");
               this.navigateRestaurantHome();
              }
           } else {

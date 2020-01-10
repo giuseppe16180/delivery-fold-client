@@ -25,7 +25,7 @@ class Search extends React.Component {
     this.provider
       .doGetAllRestaurants()
       .then(response => this.setState({ results: response }));
-    this.handleSearch = this.handleSearch.bind(this); // Era questo il problema   https://stackoverflow.com/questions/39176248/react-js-cant-read-property-of-undefined
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {

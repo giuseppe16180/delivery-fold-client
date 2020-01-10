@@ -122,7 +122,7 @@ class CustomerHome extends React.Component {
                     "\n\nValido fino al: " +
                     new Date(item.scadenza).toLocaleDateString()
                   }
-                  onAddToCart={() => this.handleAddToCart(item.info.id)} //TODO non so se funziona così
+                  onAddToCart={() => this.handleAddToCart(item.info.id)} 
                 />
               )}
               keyExtractor={item => item.id}
